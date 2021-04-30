@@ -1,0 +1,297 @@
+#'===========================================================================================
+#'9595N1: Network Analysis and Infographics
+#'SPRU Science Policy Research Unit, University of Sussex
+#'===========================================================================================
+#'NAI Individual Assignement
+#'===========================================================================================
+
+
+#0.Remove objects and load igraph ----------
+rm(list=ls())
+library(igraph)
+library(tidyverse)                                                     
+library(readr)
+
+# reading the CSV:
+  #setwd("C:/Users/Gildas/OneDrive/MSC SUSDEV/NAI/NAI Individual Assignement/data_for_students/csv_clean")
+  #Advanced_Materials <- read_csv("Advanced Materials_UTF8_clean.csv")
+  #Biotech <- read_csv("Biotech_UTF8_clean.csv")
+  #Microelectronics <- read_csv("Microelectronics_UTF8_clean.csv")
+  #Nanotech <- read_csv("Nanotech_UTF8_clean.csv")
+  #Photonics <- read_csv("Photonics_UTF8_clean.csv")
+
+
+# reading the gml:
+setwd("C:/Users/Gildas/OneDrive/MSC SUSDEV/NAI/NAI Individual Assignement/data_for_students/graphs")
+Advanced_Materials <-read_graph("Advanced Materials_UTF8.gml", format = "gml")
+Biotech <-read_graph("Biotech_UTF8.gml", format = "gml")
+Microelectronics <-read_graph("Microelectronics_UTF8.gml", format = "gml")
+Nanotech <-read_graph("Nanotech_UTF8.gml", format = "gml")
+Photonics <-read_graph("Photonics_UTF8.gml", format = "gml")
+
+
+# Let's not plot these
+p = plot(Advanced_Materials, vertex.label=NA)
+#p = plot(Biotech, vertex.label=NA)
+#p = plot(Microelectronics, vertex.label=NA)
+#p = plot(Nanotech, vertex.label=NA)
+#p = plot(Photonics, vertex.label=NA)
+
+
+
+# first start with a few variables:
+  #1.Diameter
+    d_g1 <- diameter(Advanced_Materials, directed = FALSE, unconnected = TRUE)        
+    get.diameter(Advanced_Materials)                                                    
+    d_g2 <- diameter(Biotech, directed = FALSE, unconnected = TRUE)        
+    get.diameter(Biotech)                                                    
+    d_g3 <- diameter(Microelectronics, directed = FALSE, unconnected = TRUE)          
+    get.diameter(Microelectronics)                                                    
+    d_g4 <- diameter(Nanotech, directed = FALSE, unconnected = TRUE)        
+    get.diameter(Nanotech)                                                    
+    d_g5 <- diameter(Photonics, directed = FALSE, unconnected = TRUE)        
+    get.diameter(Photonics)                                                     
+
+  #2.APL #Unconnected network (apl is evalauted on the largest component)
+    apl_g1  <- mean_distance(Advanced_Materials, directed = FALSE, unconnected = TRUE) 
+    dist_g1 <- distances(Advanced_Materials)                                          
+    apl_g2  <- mean_distance(Biotech, directed = FALSE, unconnected = TRUE) 
+    dist_g2 <- distances(Biotech)                                           
+    apl_g3  <- mean_distance(Microelectronics, directed = FALSE, unconnected = TRUE) 
+    dist_g3 <- distances(Microelectronics)                                          
+    apl_g4  <- mean_distance(Nanotech, directed = FALSE, unconnected = TRUE)
+    dist_g4 <- distances(Nanotech)                                        
+    apl_g5  <- mean_distance(Photonics, directed = FALSE, unconnected = TRUE)
+    dist_g5 <- distances(Photonics)                                   
+
+  #3.Density
+    ed_g1 <- edge_density(Advanced_Materials)                                
+    ed_g2 <- edge_density(Biotech)                                    
+    ed_g3 <- edge_density(Microelectronics)                                      
+    ed_g4 <- edge_density(Nanotech)                                    
+    ed_g5 <- edge_density(Photonics)                                       
+
+  #4.Components
+  #Unconnected network
+    comp_g1 <- components(Advanced_Materials)
+    comp_g2 <- components(Biotech)                                  
+    comp_g3 <- components(Microelectronics)                                
+    comp_g4 <- components(Nanotech)                                         
+    comp_g5 <- components(Photonics)
+
+  #5.Cutpoints/Bridges
+    cp_g1 <- articulation_points(Advanced_Materials)
+    cp_g2 <- articulation_points(Biotech)                                   
+    cp_g3 <- articulation_points(Microelectronics)                                  
+    cp_g4 <- articulation_points(Nanotech)                                    
+    cp_g5 <- articulation_points(Photonics)                                 
+    
+  #6.Point/line connectivity  #Unconnected network
+    pointc_g1 <- min_cut(Advanced_Materials)
+    pointc_g2 <- min_cut(Biotech)
+    pointc_g3 <- min_cut(Microelectronics)
+    pointc_g4 <- min_cut(Nanotech)
+    pointc_g5 <- min_cut(Photonics)
+
+  #7.Cliques
+    
+    #cliques_g <- cliques(Advanced_Materials, min = 3)                                   #List of cliques
+    #cliques_g
+    numcliques_g1 <- count_max_cliques(Advanced_Materials, min = 3) 
+    numcliques_g2 <- count_max_cliques(Biotech, min = 3) 
+    numcliques_g3 <- count_max_cliques(Microelectronics, min = 3) 
+    numcliques_g4 <- count_max_cliques(Nanotech, min = 3) 
+    numcliques_g5 <- count_max_cliques(Photonics, min = 3) 
+
+  #8.Inclusiveness 
+  
+    numisolates_g1 <- sum(degree(Advanced_Materials)==0)  
+    numisolates_g2 <- sum(degree(Biotech)==0)  
+    numisolates_g3 <- sum(degree(Microelectronics)==0)  
+    numisolates_g4 <- sum(degree(Nanotech)==0)  
+    numisolates_g5 <- sum(degree(Photonics)==0)  
+    isolates_g1 <- V(Advanced_Materials)[degree(Advanced_Materials)==0]
+    isolates_g2 <- V(Biotech)[degree(Biotech)==0]
+    isolates_g3 <- V(Microelectronics)[degree(Microelectronics)==0]
+    isolates_g4 <- V(Nanotech)[degree(Nanotech)==0]
+    isolates_g5 <- V(Photonics)[degree(Photonics)==0]
+    inclusiveness_g1 <- (vcount(Advanced_Materials)-numisolates_g1)/vcount(Advanced_Materials)
+    inclusiveness_g2 <- (vcount(Biotech)-numisolates_g2)/vcount(Biotech)
+    inclusiveness_g3 <- (vcount(Microelectronics)-numisolates_g3)/vcount(Microelectronics)
+    inclusiveness_g4 <- (vcount(Nanotech)-numisolates_g4)/vcount(Nanotech)
+    inclusiveness_g5 <- (vcount(Photonics)-numisolates_g5)/vcount(Photonics)
+
+  #9.Reachable pairs
+    
+    dist_g1 <- distances(Advanced_Materials)                                             #Get the distance matrix
+    dist_g2 <- distances(Biotech)                                             
+    dist_g3 <- distances(Microelectronics)                                             
+    dist_g4 <- distances(Nanotech)                                            
+    dist_g5 <- distances(Photonics)                                            
+    observed_pairs_g1 <- (sum(!is.infinite(distances(Advanced_Materials)))-vcount(Advanced_Materials))/2  #Observed reachable pairs
+    observed_pairs_g2 <- (sum(!is.infinite(distances(Biotech)))-vcount(Biotech))/2  
+    observed_pairs_g3 <- (sum(!is.infinite(distances(Microelectronics)))-vcount(Microelectronics))/2  
+    observed_pairs_g4 <- (sum(!is.infinite(distances(Nanotech)))-vcount(Nanotech))/2 
+    observed_pairs_g5 <- (sum(!is.infinite(distances(Photonics)))-vcount(Photonics))/2  
+    potentail_pairs_g1 <- vcount(Advanced_Materials)*(vcount(Advanced_Materials)-1)/2                     #Potential reachable pairs
+    potentail_pairs_g2 <- vcount(Biotech)*(vcount(Biotech)-1)/2                     
+    potentail_pairs_g3 <- vcount(Microelectronics)*(vcount(Microelectronics)-1)/2                   
+    potentail_pairs_g4 <- vcount(Nanotech)*(vcount(Nanotech)-1)/2                   
+    potentail_pairs_g5 <- vcount(Photonics)*(vcount(Photonics)-1)/2                     
+    reach_g1 <- observed_pairs_g1/potentail_pairs_g1                      #Proportion of reachable pairs
+    reach_g2 <- observed_pairs_g2/potentail_pairs_g2                    
+    reach_g3 <- observed_pairs_g3/potentail_pairs_g3                      
+    reach_g4 <- observed_pairs_g4/potentail_pairs_g4                   
+    reach_g5 <- observed_pairs_g5/potentail_pairs_g5                     
+
+  #10.Transitivity 
+
+    transitivity_g1 <- transitivity(Advanced_Materials, type = "globalundirected")       #Calculate transitivity
+    transitivity_g2 <- transitivity(Biotech, type = "globalundirected")
+    transitivity_g3 <- transitivity(Microelectronics, type = "globalundirected")
+    transitivity_g4 <- transitivity(Nanotech, type = "globalundirected") 
+    transitivity_g5 <- transitivity(Photonics, type = "globalundirected")
+
+    library(qgraph)
+    smallworldness1 = smallworldness(Advanced_Materials, B = 1000, up = 0.995, lo = 0.005)
+    smallworldness2 = smallworldness(Biotech, B = 1000, up = 0.995, lo = 0.005)
+    smallworldness3 = smallworldness(Microelectronics, B = 1000, up = 0.995, lo = 0.005)
+    smallworldness4 = smallworldness(Nanotech, B = 1000, up = 0.995, lo = 0.005)
+    smallworldness5 = smallworldness(Photonics, B = 1000, up = 0.995, lo = 0.005)
+    
+    
+  #11 overall recap !!
+    
+    statistic <- c("Name", "Nodes", "Edges", "Components", "Diameter", "APL", "Density", "Cliques", "Inclusiveness", "Reachable Pairs", "Transitivity")
+    df1 <- c("Advanced_Materials", gorder(Advanced_Materials), gsize(Advanced_Materials), comp_g1$no, d_g1[1], round(apl_g1,4), round(ed_g1[1],4), numcliques_g1[1], round(inclusiveness_g1[1],4), round(reach_g1[1],4), round(transitivity_g1[1],4))
+    df2 <- c("Biotech", gorder(Biotech), gsize(Biotech), comp_g2$no, d_g2[1], round(apl_g2,4), round(ed_g2[1],4), numcliques_g2[1], round(inclusiveness_g2[1],4), round(reach_g2[1],4), round(transitivity_g2[1],4))
+    df3 <- c("Microelectronics", gorder(Microelectronics), gsize(Microelectronics), comp_g3$no, d_g3[1], round(apl_g3,4), round(ed_g3[1],4), numcliques_g3[1], round(inclusiveness_g3[1],4), round(reach_g3[1],4), round(transitivity_g3[1],4))
+    df4 <- c("Nanotech", gorder(Nanotech), gsize(Nanotech), comp_g4$no, d_g4[1], round(apl_g4,4), round(ed_g4[1],4), numcliques_g4[1], round(inclusiveness_g4[1],4), round(reach_g4[1],4), round(transitivity_g4[1],4))
+    df5 <- c("Photonics", gorder(Photonics), gsize(Photonics), comp_g5$no, d_g5[1], round(apl_g5,4), round(ed_g5[1],4), numcliques_g5[1], round(inclusiveness_g5[1],4), round(reach_g5[1],4), round(transitivity_g5[1],4))
+    df <- data.frame(statistic, df1, df2, df3, df4, df5)
+    df
+
+# Lets add to the graph:
+  - - - - - - - -  # color
+      colour_code <- data.frame( ID=1:3,
+                             code=c("IND", "CON", "PNP", "ROR", "RH", "GOV", "EDU", "OTH", "N/A"),
+                             sector=c("Indutry", "Consulting", "Private Non-Profit", "Research Organisation", "Research Hospital", "Government", "Education", "Other", "Not Applicable"),
+                             colour=c("red", "pink", "violet", "blue", "lightblue", "green", "yellow", "grey", "grey") )
+  
+      # Advanced_Materials
+      my_list1 = as.data.frame(V(Advanced_Materials)$OrgType)
+      names(my_list1)[1] <- "code"
+      my_list11 = my_list1
+      my_list11 <- my_list11 %>%
+        left_join(colour_code, by = "code") %>%
+        select("sector")
+      #my_list11
+      my_list12 = my_list1
+      my_list12 <- my_list1 %>%
+        left_join(colour_code, by = "code") %>%
+        select("colour")
+      #my_list12
+      V(Advanced_Materials)$OrgType2 <- my_list11$sector
+      V(Advanced_Materials)$color <- my_list12$colour
+
+      # Biotech
+      my_list2 = as.data.frame(V(Biotech)$OrgType)
+      names(my_list2)[1] <- "code"
+      my_list21 = my_list2
+      my_list21 <- my_list21 %>%
+        left_join(colour_code, by = "code") %>%
+        select("sector")
+      #my_list21
+      my_list22 = my_list2
+      my_list22 <- my_list2 %>%
+        left_join(colour_code, by = "code") %>%
+        select("colour")
+      #my_list12
+      V(Biotech)$OrgType2 <- my_list21$sector
+      V(Biotech)$color <- my_list22$colour
+      
+      # Microelectronics
+      my_list3 = as.data.frame(V(Microelectronics)$OrgType)
+      names(my_list3)[1] <- "code"
+      my_list31 = my_list3
+      my_list31 <- my_list31 %>%
+        left_join(colour_code, by = "code") %>%
+        select("sector")
+      #my_list31
+      my_list32 = my_list3
+      my_list32 <- my_list3 %>%
+        left_join(colour_code, by = "code") %>%
+        select("colour")
+      #my_list32
+      V(Microelectronics)$OrgType2 <- my_list31$sector
+      V(Microelectronics)$color <- my_list32$colour
+      
+      # Nanotech
+      my_list4 = as.data.frame(V(Nanotech)$OrgType)
+      names(my_list4)[1] <- "code"
+      my_list41 = my_list4
+      my_list41 <- my_list41 %>%
+        left_join(colour_code, by = "code") %>%
+        select("sector")
+      #my_list41
+      my_list42 = my_list1
+      my_list42 <- my_list1 %>%
+        left_join(colour_code, by = "code") %>%
+        select("colour")
+      #my_list42
+      V(Nanotech)$OrgType2 <- my_list41$sector
+      V(Nanotech)$color <- my_list42$colour
+      
+      # Photonics
+      my_list5 = as.data.frame(V(Photonics)$OrgType)
+      names(my_list5)[1] <- "code"
+      my_list51 = my_list5
+      my_list51 <- my_list51 %>%
+        left_join(colour_code, by = "code") %>%
+        select("sector")
+      #my_list51
+      my_list52 = my_list5
+      my_list52 <- my_list5 %>%
+        left_join(colour_code, by = "code") %>%
+        select("colour")
+      #my_list52
+      V(Photonics)$OrgType2 <- my_list51$sector
+      V(Photonics)$color <- my_list52$colour
+      
+      - - - - - - - -  # other attributes
+        
+      V(Advanced_Materials)$degree <- degree(Advanced_Materials, normalized = FALSE)
+      V(Biotech)$degree <- degree(Biotech, normalized = FALSE)
+      V(Microelectronics)$degree <- degree(Microelectronics, normalized = FALSE)
+      V(Nanotech)$degree <- degree(Nanotech, normalized = FALSE)
+      V(Photonics)$degree <- degree(Photonics, normalized = FALSE)
+      V(Advanced_Materials)$size <- log(V(Advanced_Materials)$degree)*1.25      
+      V(Biotech)$size <- log(V(Biotech)$degree)*1.25      
+      V(Microelectronics)$size <- log(V(Microelectronics)$degree)*1.25      
+      V(Nanotech)$size <- log(V(Nanotech)$degree)*1.25      
+      V(Photonics)$size <- log(V(Photonics)$degree)*1.25
+      
+    l_kk <- layout_with_kk(Advanced_Materials)                                           #Kamada-Kawai layout
+    plot(Advanced_Materials, layout = l_kk, vertex.label=NA)       
+    l_kk <- layout_with_kk(Biotech)                                      
+    plot(Biotech, layout = l_kk, vertex.label=NA)       
+    l_kk <- layout_with_kk(Microelectronics) 
+    plot(Microelectronics, layout = l_kk, vertex.label=NA)       
+    l_kk <- layout_with_kk(Nanotech) 
+    plot(Nanotech, layout = l_kk, vertex.label=NA)       
+    l_kk <- layout_with_kk(Photonics) 
+    plot(Photonics, layout = l_kk, vertex.label=NA)       
+    
+    l_nicely <- layout_nicely(Photonics)                                        #igraph finds the best layout
+    plot(Photonics, layout = l_nicely, vertex.label=NA)                                          #Display the network
+    
+    l_nicely <- layout_nicely(Advanced_Materials)                                           #Kamada-Kawai layout
+    plot(Advanced_Materials, layout = l_nicely, vertex.label=NA)       
+    l_nicely <- layout_nicely(Biotech)                                      
+    plot(Biotech, layout = l_nicely, vertex.label=NA)       
+    l_nicely <- layout_nicely(Microelectronics) 
+    plot(Microelectronics, layout = l_nicely, vertex.label=NA)       
+    l_nicely <- layout_nicely(Nanotech) 
+    plot(Nanotech, layout = l_nicely, vertex.label=NA)       
+    l_nicely <- layout_nicely(Photonics) 
+    plot(Photonics, layout = l_nicely, vertex.label=NA)
