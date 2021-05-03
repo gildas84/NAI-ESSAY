@@ -1,0 +1,77 @@
+#'===========================================================================================
+#'9595N1: Network Analysis and Infographics
+#'SPRU Science Policy Research Unit, University of Sussex
+#'===========================================================================================
+#'NAI Individual Assignement - Descriptive data
+#'===========================================================================================
+
+
+#0.Remove objects and load igraph ----------
+rm(list=ls())
+library(igraph)
+library(tidyverse)                                                     
+library(readr)
+
+library(reshape2)
+
+# reading the csv:
+setwd("C:/Users/Gildas/OneDrive/MSC SUSDEV/NAI/NAI Individual Assignement/data_for_students/csv_clean")
+Advanced_Materials <- read_csv("Advanced Materials_UTF8_clean.csv")
+Biotech <- read_csv("Biotech_UTF8_clean.csv")
+Microelectronics <- read_csv("Microelectronics_UTF8_clean.csv")
+Nanotech <- read_csv("Nanotech_UTF8_clean.csv")
+Photonics <- read_csv("Photonics_UTF8_clean.csv")
+
+Advanced_Materials$Sector <- "Advanced_Materials"
+Advanced_Materials$Counts <- 1/nrow(Advanced_Materials)
+
+Biotech$Sector <- "Biotech"
+Biotech$Counts <- 1/nrow(Biotech)
+
+Microelectronics$Sector <- "Microelectronics"
+Microelectronics$Counts <- 1/nrow(Microelectronics)
+
+Nanotech$Sector <- "Nanotech"
+Nanotech$Counts <- 1/nrow(Nanotech)
+
+Photonics$Sector <- "Photonics"
+Photonics$Counts <- 1/nrow(Photonics)
+
+Horizon <- rbind(Advanced_Materials, Biotech, Microelectronics, Nanotech, Photonics)
+
+ggplot(data = Horizon) +
+  geom_bar(mapping = aes(x = Sector, fill = OrgType), position = "fill")
+
+Horizon_t <- Horizon %>%
+    group_by(Sector, OrgType) %>%
+    summarize(count = sum(Counts))
+Horizon_n = dcast(Horizon_t, OrgType ~ Sector, value.var = "count")
+Horizon_n
+
+Horizon_t <- Horizon %>%
+  group_by(Sector, OrgType) %>%
+  summarize(count = sum(n()))
+Horizon_n = dcast(Horizon_t, OrgType ~ Sector, value.var = "count")
+Horizon_n
+ggplot(data = Horizon) +
+  geom_bar(mapping = aes(x = Sector, fill = OrgType), position = "stack")
+
+# get the average number of actors by projects
+
+Horizon$n = 1
+Horizon_loin <- Horizon %>%
+  group_by(Sector, ProjectID) %>%
+  summarize(count = sum(n()))
+Horizon_loin
+Horizon_loinHt = dcast(Horizon_loin, ProjectID ~ Sector, value.var = "count")
+Horizon_loinHt
+
+
+Horizon$n = 1
+Horizon_loin <- Horizon %>%
+  group_by(Sector, ProjectID) %>%
+  summarize(count = sum(n())) %>%
+  ungroup() %>%
+  group_by(Sector) %>%  
+  summarise(mean = sum(count), max=max(count), mean = mean(count), median = median(count), quantile = quantile(count, 0.75), sd = sd(count))
+Horizon_loin
