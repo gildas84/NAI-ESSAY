@@ -1,0 +1,86 @@
+Sub XML_openener()
+
+Dim i As Integer, y As Integer, z As Integer, b As Integer, referent As Integer
+Dim table_interim As Variant, table_final As Variant
+Dim table_numbers As Variant
+Dim mycellcol1 As Integer, mycellrow1  As Integer, mycellrow2  As Integer
+ReDim table_final(1 To 3586, 1 To 1600, 1 To 4)
+ReDim table_numbers(1 To 3586, 1 To 3)
+
+For i = 1 To 3586
+    For y = 1 To 2
+        table_numbers(i, y) = Worksheets("Sheet2").Cells(i + 1, y + 1)
+
+    Next y
+    table_numbers(i, 3) = "project-rcn-" & table_numbers(i, 1) & "_en"
+Next i
+referent = 1
+
+For i = 1434 To UBound(table_numbers)
+    Application.ScreenUpdating = False
+    Workbooks.OpenXML Filename:="C:\Users\Gildas\OneDrive\MSC SUSDEV\NAI\NAI Individual Assignement\data_for_students\DATA EXTRA\" & table_numbers(i, 3) & ".xml", LoadOption:=xlXmlLoadImportToList
+
+    Application.Wait (Now + TimeValue("0:00:02"))
+
+    
+    Cells.Find(What:="legalName", After:=ActiveCell, LookIn:=xlFormulas, _
+     LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, _
+     MatchCase:=False, SearchFormat:=False).Activate
+    
+    mycellcol = ActiveCell.Column
+    mycellrow = ActiveCell.Row
+    Cells(mycellrow, mycellcol).Select
+    Selection.End(xlUp).Select
+    Selection.End(xlUp).Select
+    Selection.End(xlUp).Select
+    Selection.End(xlUp).Select
+    
+
+    If Cells(2, mycellcol) = "" Then
+        mycellcol = ActiveCell.Column
+        Selection.End(xlDown).Select
+        Selection.End(xlUp).Select
+        Selection.End(xlUp).Select
+        Selection.End(xlUp).Select
+        Selection.End(xlDown).Select
+    
+        mycellrow1 = ActiveCell.Row
+        Selection.End(xlDown).Select
+        mycellrow2 = ActiveCell.Row
+    Else
+        Selection.End(xlDown).Select
+        mycellcol = ActiveCell.Column
+        mycellrow1 = 2
+        mycellrow2 = ActiveCell.Row
+    End If
+    
+    
+    'C:\Users\Gildas\OneDrive\MSC SUSDEV\NAI\NAI Individual Assignement\data_for_students\DATA EXTRA\
+    ' 83/84/89 /
+    z = 1
+    For y = 1 To (mycellrow2 - mycellrow1 + 1)
+        table_final(i, z, 1) = table_numbers(i, 1)
+        table_final(i, z, 2) = Cells(mycellrow1 + y - 1, mycellcol)
+       
+        table_final(i, z, 3) = Cells(mycellrow1 + y - 1, mycellcol + 1)
+        table_final(i, z, 4) = Cells(mycellrow1 + y - 1, mycellcol + 5)
+        z = z + 1
+    Next y
+
+    ActiveWorkbook.Close SaveChanges:=False
+    
+    Worksheets("Sheet2").Activate
+    For b = 1 To UBound(table_final, 2)
+        If table_final(i, b, 1) <> "" Then
+            Cells(referent, 22) = table_final(i, b, 1)
+            Cells(referent, 23) = table_final(i, b, 2)
+            Cells(referent, 24) = table_final(i, b, 3)
+            Cells(referent, 25) = table_final(i, b, 4)
+            Cells(referent, 26) = i
+            
+            referent = referent + 1
+        End If
+    Next b
+
+Next i
+End Sub
