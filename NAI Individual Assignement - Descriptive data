@@ -75,3 +75,30 @@ Horizon_loin <- Horizon %>%
   group_by(Sector) %>%  
   summarise(mean = sum(count), max=max(count), mean = mean(count), median = median(count), quantile = quantile(count, 0.75), sd = sd(count))
 Horizon_loin
+     
+   
+# Lets graph average projects participants by domain
+Horizon$n = 1
+Horizon_by_project <- Horizon %>%
+  group_by(Sector, ProjectID) %>%
+  summarize(count = sum(n()))
+ggplot(data = Horizon_by_project, mapping = aes(x = Sector, y = count)) +
+  geom_boxplot(outlier.alpha = 0) +
+  geom_jitter(width = 0) +
+  coord_flip()
+
+ggplot(data = Horizon_by_project) +
+  geom_violin(mapping = aes(x = Sector, y = count)) + 
+  coord_flip()
+
+
+ggplot(data = Horizon_by_project, mapping = aes(x = Sector, y = count)) +
+  geom_point() +
+  geom_smooth(mapping = aes(color = Sector), se = FALSE)
+
+ggplot(data = Horizon_by_project, mapping = aes(x = Sector, y = count)) +
+  geom_point(mapping = aes(size = count)) +
+  geom_smooth()
+
+ggplot(data = Horizon_by_project) +
+  geom_bin2d(mapping = aes(x = Sector, y = count), bins = c(50, 40))
