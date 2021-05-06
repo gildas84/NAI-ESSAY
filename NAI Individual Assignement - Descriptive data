@@ -34,6 +34,23 @@ Microelectronics$Counts <- 1/nrow(Microelectronics)
 Nanotech$Sector <- "Nanotech"
 Nanotech$Counts <- 1/nrow(Nanotech)
 
+# legend on graph
+
+g <- graph.formula(1-2, 2-3, 3-4, 4-4, 5-5, 6-6, 7-7, 8-8, 9-9)  #List of edges
+sector=c("Indutry", "Consulting", "Private Non-Profit", "Research Organisation", "Research Hospital", "Government", "Education", "Other", "Not Applicable")
+colour=c("red", "pink", "violet", "blue", "lightblue", "green", "yellow", "grey", "black")
+#Explore the network
+V(g)                                                        #Nodes
+E(g)                                                        #Edges
+
+E(g)$size = 0
+V(g)$color = colour
+V(g)$name = sector    
+
+get.adjacency(g)                                            #Adjacency matrix
+plot(g)                                                     #Display the network
+
+
 Photonics$Sector <- "Photonics"
 Photonics$Counts <- 1/nrow(Photonics)
 
