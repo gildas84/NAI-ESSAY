@@ -554,6 +554,7 @@ Photonics <- delete.vertices(simplify(Photonics), degree(simplify(Photonics))<=2
     l_nicely <- layout_nicely(Advanced_Materials)                                                       #Kamada-Kawai layout
     plot(Advanced_Materials, layout = l_nicely, vertex.label=NA, main = "Advanced Materials")
     dev.off()
+    
     pdf("C:/Users/Gildas/OneDrive/MSC SUSDEV/NAI/NAI Individual Assignement/Biotech.pdf")     
     l_nicely <- layout_nicely(Biotech)                                      
     plot(Biotech, layout = l_nicely, vertex.label=NA, main = "Biotech")     
@@ -574,11 +575,44 @@ Photonics <- delete.vertices(simplify(Photonics), degree(simplify(Photonics))<=2
     plot(Photonics, layout = l_nicely, vertex.label=NA, main = "Photonics")
     dev.off()
 
-
-    
-    
+  V(Advanced_Materials)
+    l_nicely <- layout_nicely(Advanced_Materials)                                                       #Kamada-Kawai layout
+    plot(Advanced_Materials, layout = l_nicely, vertex.label=NA, main = "Advanced Materials")
+  V(Biotech)
     layout_fr <-layout_with_fr(Biotech)
     plot(Biotech, layout = layout_fr, vertex.label=NA, main = "Biotech")  
+    
+    layout_drl <- layout_with_drl(Biotech)
+    plot(Biotech, layout = layout_drl, vertex.label=NA, main = "Biotech")  
+    
+    layout_tree <- layout_as_tree(Biotech)
+    plot(Biotech, layout = layout_tree, vertex.label=NA, main = "Biotech")  
+    
+    layout_dh <- layout_with_dh(Biotech)
+    plot(Biotech, layout = layout_dh, vertex.label=NA, main = "Biotech")  
+    
+    layout_gem <- layout_with_gem(Biotech)
+    plot(Biotech, layout = layout_gem, vertex.label=NA, main = "Biotech")  
+    
+    layout_graphopt <- layout_with_graphopt(Biotech)
+    plot(Biotech, layout = layout_graphopt, vertex.label=NA, main = "Biotech")  
+    
+    layout_lgl <- layout_with_lgl(Biotech)
+    plot(Biotech, layout = layout_lgl, vertex.label=NA, main = "Biotech")  
+    
+    layout_mds <- layout_with_mds(Biotech)
+    plot(Biotech, layout = layout_mds, vertex.label=NA, main = "Biotech")  
+    
+    layout_sugi <- layout_with_sygiyama(Biotech)
+    plot(Biotech, layout = layout_sugi, vertex.label=NA, main = "Biotech")  
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -607,4 +641,7 @@ Photonics <- delete.vertices(simplify(Photonics), degree(simplify(Photonics))<=2
     br3$exp.grp	
     br4$exp.grp	
     br5$exp.grp	
+    
+    
+    
     
