@@ -417,11 +417,11 @@ Photonics <- delete.vertices(simplify(Photonics), degree(simplify(Photonics))<=2
     
     # Lets add to the graph:
     #- - - - - - - -  # color
-    colour_code <- data.frame( ID=1:3,
-                               code=c("IND", "CON", "PNP", "ROR", "RH", "GOV", "EDU", "OTH", "N/A"),
-                               sector=c("Indutry", "Consulting", "Private Non-Profit", "Research Organisation", "Research Hospital", "Government", "Education", "Other", "Not Applicable"),
-                               colour=c("red", "pink", "violet", "blue", "lightblue", "green", "yellow", "grey", "grey") )
-    
+colour_code <- data.frame( ID=1:10,
+                           code=c("IND", "CON", "PNP", "ROR", "RH", "GOV", "EDU", "OTH", "N/A", "NCL"),
+                           sector=c("Industry", "Consulting", "Private Non-Profit", "Research Organisation", "Research Hospital", "Government", "Education", "Other", "Not Applicable", "Non Commercial Organisation"),
+                           colour=c("red", "pink", "violet", "blue", "lightblue", "green", "yellow", "black", "grey", "brown") )
+
     # Advanced_Materials
     my_list1 = as.data.frame(V(Advanced_Materials)$OrgType)
     names(my_list1)[1] <- "code"
