@@ -15,12 +15,12 @@ library(reshape2)
 
 
 # reading the CSV:
-  #setwd("C:/Users/Gildas/OneDrive/MSC SUSDEV/NAI/NAI Individual Assignement/data_for_students/csv_clean")
-  #Advanced_Materials <- read_csv("Advanced Materials_UTF8_clean.csv")
-  #Biotech <- read_csv("Biotech_UTF8_clean.csv")
-  #Microelectronics <- read_csv("Microelectronics_UTF8_clean.csv")
-  #Nanotech <- read_csv("Nanotech_UTF8_clean.csv")
-  #Photonics <- read_csv("Photonics_UTF8_clean.csv")
+#setwd("C:/Users/Gildas/OneDrive/MSC SUSDEV/NAI/NAI Individual Assignement/data_for_students/csv_clean")
+#Advanced_Materials <- read_csv("Advanced Materials_UTF8_clean.csv")
+#Biotech <- read_csv("Biotech_UTF8_clean.csv")
+#Microelectronics <- read_csv("Microelectronics_UTF8_clean.csv")
+#Nanotech <- read_csv("Nanotech_UTF8_clean.csv")
+#Photonics <- read_csv("Photonics_UTF8_clean.csv")
 
 
 # reading the gml:
@@ -48,600 +48,732 @@ Photonics <- delete.vertices(simplify(Photonics), degree(simplify(Photonics))<=2
 
 
 # first start with a few variables:
-  #1.Diameter
-    d_g1 <- diameter(Advanced_Materials, directed = FALSE, unconnected = TRUE)        
-    get.diameter(Advanced_Materials)                                                    
-    d_g2 <- diameter(Biotech, directed = FALSE, unconnected = TRUE)        
-    get.diameter(Biotech)                                                    
-    d_g3 <- diameter(Microelectronics, directed = FALSE, unconnected = TRUE)          
-    get.diameter(Microelectronics)                                                    
-    d_g4 <- diameter(Nanotech, directed = FALSE, unconnected = TRUE)        
-    get.diameter(Nanotech)                                                    
-    d_g5 <- diameter(Photonics, directed = FALSE, unconnected = TRUE)        
-    get.diameter(Photonics)                                                     
+#1.Diameter
+d_g1 <- diameter(Advanced_Materials, directed = FALSE, unconnected = TRUE)        
+get.diameter(Advanced_Materials)                                                    
+d_g2 <- diameter(Biotech, directed = FALSE, unconnected = TRUE)        
+get.diameter(Biotech)                                                    
+d_g3 <- diameter(Microelectronics, directed = FALSE, unconnected = TRUE)          
+get.diameter(Microelectronics)                                                    
+d_g4 <- diameter(Nanotech, directed = FALSE, unconnected = TRUE)        
+get.diameter(Nanotech)                                                    
+d_g5 <- diameter(Photonics, directed = FALSE, unconnected = TRUE)        
+get.diameter(Photonics)                                                     
 
-  #2.APL #Unconnected network (apl is evalauted on the largest component)
-    apl_g1  <- mean_distance(Advanced_Materials, directed = FALSE, unconnected = TRUE) 
-    dist_g1 <- distances(Advanced_Materials)                                          
-    apl_g2  <- mean_distance(Biotech, directed = FALSE, unconnected = TRUE) 
-    dist_g2 <- distances(Biotech)                                           
-    apl_g3  <- mean_distance(Microelectronics, directed = FALSE, unconnected = TRUE) 
-    dist_g3 <- distances(Microelectronics)                                          
-    apl_g4  <- mean_distance(Nanotech, directed = FALSE, unconnected = TRUE)
-    dist_g4 <- distances(Nanotech)                                        
-    apl_g5  <- mean_distance(Photonics, directed = FALSE, unconnected = TRUE)
-    dist_g5 <- distances(Photonics)                                   
+#2.APL #Unconnected network (apl is evalauted on the largest component)
+apl_g1  <- mean_distance(Advanced_Materials, directed = FALSE, unconnected = TRUE) 
+dist_g1 <- distances(Advanced_Materials)                                          
+apl_g2  <- mean_distance(Biotech, directed = FALSE, unconnected = TRUE) 
+dist_g2 <- distances(Biotech)                                           
+apl_g3  <- mean_distance(Microelectronics, directed = FALSE, unconnected = TRUE) 
+dist_g3 <- distances(Microelectronics)                                          
+apl_g4  <- mean_distance(Nanotech, directed = FALSE, unconnected = TRUE)
+dist_g4 <- distances(Nanotech)                                        
+apl_g5  <- mean_distance(Photonics, directed = FALSE, unconnected = TRUE)
+dist_g5 <- distances(Photonics)                                   
 
-  #3.Density
-    ed_g1 <- edge_density(Advanced_Materials)                                
-    ed_g2 <- edge_density(Biotech)                                    
-    ed_g3 <- edge_density(Microelectronics)                                      
-    ed_g4 <- edge_density(Nanotech)                                    
-    ed_g5 <- edge_density(Photonics)                                       
+#3.Density
+ed_g1 <- edge_density(Advanced_Materials)                                
+ed_g2 <- edge_density(Biotech)                                    
+ed_g3 <- edge_density(Microelectronics)                                      
+ed_g4 <- edge_density(Nanotech)                                    
+ed_g5 <- edge_density(Photonics)                                       
 
-  #4.Components
-  #Unconnected network
-    comp_g1 <- components(Advanced_Materials)
-    comp_g2 <- components(Biotech)                                  
-    comp_g3 <- components(Microelectronics)                                
-    comp_g4 <- components(Nanotech)                                         
-    comp_g5 <- components(Photonics)
+#4.Components
+#Unconnected network
+comp_g1 <- components(Advanced_Materials)
+comp_g2 <- components(Biotech)                                  
+comp_g3 <- components(Microelectronics)                                
+comp_g4 <- components(Nanotech)                                         
+comp_g5 <- components(Photonics)
 
-  #5.Cutpoints/Bridges
-    cp_g1 <- articulation_points(Advanced_Materials)
-    cp_g2 <- articulation_points(Biotech)                                   
-    cp_g3 <- articulation_points(Microelectronics)                                  
-    cp_g4 <- articulation_points(Nanotech)                                    
-    cp_g5 <- articulation_points(Photonics)                                 
-    
-  #6.Point/line connectivity  #Unconnected network
-    pointc_g1 <- min_cut(Advanced_Materials)
-    pointc_g2 <- min_cut(Biotech)
-    pointc_g3 <- min_cut(Microelectronics)
-    pointc_g4 <- min_cut(Nanotech)
-    pointc_g5 <- min_cut(Photonics)
+#5.Cutpoints/Bridges
+cp_g1 <- articulation_points(Advanced_Materials)
+cp_g2 <- articulation_points(Biotech)                                   
+cp_g3 <- articulation_points(Microelectronics)                                  
+cp_g4 <- articulation_points(Nanotech)                                    
+cp_g5 <- articulation_points(Photonics)                                 
 
-  #7.Cliques
-    
-    #cliques_g <- cliques(Advanced_Materials, min = 3)                                   #List of cliques
-    #cliques_g
-    numcliques_g1 <- count_max_cliques(Advanced_Materials, min = 3) 
-    numcliques_g2 <- count_max_cliques(Biotech, min = 3) 
-    numcliques_g3 <- count_max_cliques(Microelectronics, min = 3) 
-    numcliques_g4 <- count_max_cliques(Nanotech, min = 3) 
-    numcliques_g5 <- count_max_cliques(Photonics, min = 3) 
+#6.Point/line connectivity  #Unconnected network
+pointc_g1 <- min_cut(Advanced_Materials)
+pointc_g2 <- min_cut(Biotech)
+pointc_g3 <- min_cut(Microelectronics)
+pointc_g4 <- min_cut(Nanotech)
+pointc_g5 <- min_cut(Photonics)
 
-  #8.Inclusiveness 
-  
-    numisolates_g1 <- sum(degree(Advanced_Materials)==0)  
-    numisolates_g2 <- sum(degree(Biotech)==0)  
-    numisolates_g3 <- sum(degree(Microelectronics)==0)  
-    numisolates_g4 <- sum(degree(Nanotech)==0)  
-    numisolates_g5 <- sum(degree(Photonics)==0)  
-    isolates_g1 <- V(Advanced_Materials)[degree(Advanced_Materials)==0]
-    isolates_g2 <- V(Biotech)[degree(Biotech)==0]
-    isolates_g3 <- V(Microelectronics)[degree(Microelectronics)==0]
-    isolates_g4 <- V(Nanotech)[degree(Nanotech)==0]
-    isolates_g5 <- V(Photonics)[degree(Photonics)==0]
-    inclusiveness_g1 <- (vcount(Advanced_Materials)-numisolates_g1)/vcount(Advanced_Materials)
-    inclusiveness_g2 <- (vcount(Biotech)-numisolates_g2)/vcount(Biotech)
-    inclusiveness_g3 <- (vcount(Microelectronics)-numisolates_g3)/vcount(Microelectronics)
-    inclusiveness_g4 <- (vcount(Nanotech)-numisolates_g4)/vcount(Nanotech)
-    inclusiveness_g5 <- (vcount(Photonics)-numisolates_g5)/vcount(Photonics)
+#7.Cliques
 
-  #9.Reachable pairs
-    
-    dist_g1 <- distances(Advanced_Materials)                                             #Get the distance matrix
-    dist_g2 <- distances(Biotech)                                             
-    dist_g3 <- distances(Microelectronics)                                             
-    dist_g4 <- distances(Nanotech)                                            
-    dist_g5 <- distances(Photonics)                                            
-    observed_pairs_g1 <- (sum(!is.infinite(distances(Advanced_Materials)))-vcount(Advanced_Materials))/2  #Observed reachable pairs
-    observed_pairs_g2 <- (sum(!is.infinite(distances(Biotech)))-vcount(Biotech))/2  
-    observed_pairs_g3 <- (sum(!is.infinite(distances(Microelectronics)))-vcount(Microelectronics))/2  
-    observed_pairs_g4 <- (sum(!is.infinite(distances(Nanotech)))-vcount(Nanotech))/2 
-    observed_pairs_g5 <- (sum(!is.infinite(distances(Photonics)))-vcount(Photonics))/2  
-    potentail_pairs_g1 <- vcount(Advanced_Materials)*(vcount(Advanced_Materials)-1)/2                     #Potential reachable pairs
-    potentail_pairs_g2 <- vcount(Biotech)*(vcount(Biotech)-1)/2                     
-    potentail_pairs_g3 <- vcount(Microelectronics)*(vcount(Microelectronics)-1)/2                   
-    potentail_pairs_g4 <- vcount(Nanotech)*(vcount(Nanotech)-1)/2                   
-    potentail_pairs_g5 <- vcount(Photonics)*(vcount(Photonics)-1)/2                     
-    reach_g1 <- observed_pairs_g1/potentail_pairs_g1                      #Proportion of reachable pairs
-    reach_g2 <- observed_pairs_g2/potentail_pairs_g2                    
-    reach_g3 <- observed_pairs_g3/potentail_pairs_g3                      
-    reach_g4 <- observed_pairs_g4/potentail_pairs_g4                   
-    reach_g5 <- observed_pairs_g5/potentail_pairs_g5                     
+#cliques_g <- cliques(Advanced_Materials, min = 3)                                   #List of cliques
+#cliques_g
+numcliques_g1 <- count_max_cliques(Advanced_Materials, min = 3) 
+numcliques_g2 <- count_max_cliques(Biotech, min = 3) 
+numcliques_g3 <- count_max_cliques(Microelectronics, min = 3) 
+numcliques_g4 <- count_max_cliques(Nanotech, min = 3) 
+numcliques_g5 <- count_max_cliques(Photonics, min = 3) 
 
-  #10.Transitivity 
+#8.Inclusiveness 
 
-    transitivity_g1 <- transitivity(Advanced_Materials, type = "globalundirected")       #Calculate transitivity
-    transitivity_g2 <- transitivity(Biotech, type = "globalundirected")
-    transitivity_g3 <- transitivity(Microelectronics, type = "globalundirected")
-    transitivity_g4 <- transitivity(Nanotech, type = "globalundirected") 
-    transitivity_g5 <- transitivity(Photonics, type = "globalundirected")
+numisolates_g1 <- sum(degree(Advanced_Materials)==0)  
+numisolates_g2 <- sum(degree(Biotech)==0)  
+numisolates_g3 <- sum(degree(Microelectronics)==0)  
+numisolates_g4 <- sum(degree(Nanotech)==0)  
+numisolates_g5 <- sum(degree(Photonics)==0)  
+isolates_g1 <- V(Advanced_Materials)[degree(Advanced_Materials)==0]
+isolates_g2 <- V(Biotech)[degree(Biotech)==0]
+isolates_g3 <- V(Microelectronics)[degree(Microelectronics)==0]
+isolates_g4 <- V(Nanotech)[degree(Nanotech)==0]
+isolates_g5 <- V(Photonics)[degree(Photonics)==0]
+inclusiveness_g1 <- (vcount(Advanced_Materials)-numisolates_g1)/vcount(Advanced_Materials)
+inclusiveness_g2 <- (vcount(Biotech)-numisolates_g2)/vcount(Biotech)
+inclusiveness_g3 <- (vcount(Microelectronics)-numisolates_g3)/vcount(Microelectronics)
+inclusiveness_g4 <- (vcount(Nanotech)-numisolates_g4)/vcount(Nanotech)
+inclusiveness_g5 <- (vcount(Photonics)-numisolates_g5)/vcount(Photonics)
 
-    #    library(qgraph)
-    #    smallworldness1 = smallworldness(Advanced_Materials, B = 250, up = 0.995, lo = 0.005)
-    #    smallworldness1 = smallworldness(Biotech, B = 250, up = 0.995, lo = 0.005)
-    #    smallworldness3 = smallworldness(Microelectronics, B = 250, up = 0.995, lo = 0.005)
-    #    smallworldness4 = smallworldness(Nanotech, B = 250, up = 0.995, lo = 0.005)
-    #    smallworldness5 = smallworldness(Photonics, B = 250, up = 0.995, lo = 0.005)
-    
-    
-  #11 overall recap !!
-    
-    statistic <- c("Name", "Nodes", "Edges", "Components", "Diameter", "APL", "Density", "Cliques", "Inclusiveness", "Reachable Pairs", "Transitivity")
-    df1 <- c("Advanced_Materials", gorder(Advanced_Materials), gsize(Advanced_Materials), comp_g1$no, d_g1[1], round(apl_g1,4), round(ed_g1[1],4), numcliques_g1[1], round(inclusiveness_g1[1],4), round(reach_g1[1],4), round(transitivity_g1[1],4))
-    df2 <- c("Biotech", gorder(Biotech), gsize(Biotech), comp_g2$no, d_g2[1], round(apl_g2,4), round(ed_g2[1],4), numcliques_g2[1], round(inclusiveness_g2[1],4), round(reach_g2[1],4), round(transitivity_g2[1],4))
-    df3 <- c("Microelectronics", gorder(Microelectronics), gsize(Microelectronics), comp_g3$no, d_g3[1], round(apl_g3,4), round(ed_g3[1],4), numcliques_g3[1], round(inclusiveness_g3[1],4), round(reach_g3[1],4), round(transitivity_g3[1],4))
-    df4 <- c("Nanotech", gorder(Nanotech), gsize(Nanotech), comp_g4$no, d_g4[1], round(apl_g4,4), round(ed_g4[1],4), numcliques_g4[1], round(inclusiveness_g4[1],4), round(reach_g4[1],4), round(transitivity_g4[1],4))
-    df5 <- c("Photonics", gorder(Photonics), gsize(Photonics), comp_g5$no, d_g5[1], round(apl_g5,4), round(ed_g5[1],4), numcliques_g5[1], round(inclusiveness_g5[1],4), round(reach_g5[1],4), round(transitivity_g5[1],4))
-    df <- data.frame(statistic, df1, df2, df3, df4, df5)
-    df
+#9.Reachable pairs
+
+dist_g1 <- distances(Advanced_Materials)                                             #Get the distance matrix
+dist_g2 <- distances(Biotech)                                             
+dist_g3 <- distances(Microelectronics)                                             
+dist_g4 <- distances(Nanotech)                                            
+dist_g5 <- distances(Photonics)                                            
+observed_pairs_g1 <- (sum(!is.infinite(distances(Advanced_Materials)))-vcount(Advanced_Materials))/2  #Observed reachable pairs
+observed_pairs_g2 <- (sum(!is.infinite(distances(Biotech)))-vcount(Biotech))/2  
+observed_pairs_g3 <- (sum(!is.infinite(distances(Microelectronics)))-vcount(Microelectronics))/2  
+observed_pairs_g4 <- (sum(!is.infinite(distances(Nanotech)))-vcount(Nanotech))/2 
+observed_pairs_g5 <- (sum(!is.infinite(distances(Photonics)))-vcount(Photonics))/2  
+potentail_pairs_g1 <- vcount(Advanced_Materials)*(vcount(Advanced_Materials)-1)/2                     #Potential reachable pairs
+potentail_pairs_g2 <- vcount(Biotech)*(vcount(Biotech)-1)/2                     
+potentail_pairs_g3 <- vcount(Microelectronics)*(vcount(Microelectronics)-1)/2                   
+potentail_pairs_g4 <- vcount(Nanotech)*(vcount(Nanotech)-1)/2                   
+potentail_pairs_g5 <- vcount(Photonics)*(vcount(Photonics)-1)/2                     
+reach_g1 <- observed_pairs_g1/potentail_pairs_g1                      #Proportion of reachable pairs
+reach_g2 <- observed_pairs_g2/potentail_pairs_g2                    
+reach_g3 <- observed_pairs_g3/potentail_pairs_g3                      
+reach_g4 <- observed_pairs_g4/potentail_pairs_g4                   
+reach_g5 <- observed_pairs_g5/potentail_pairs_g5                     
+
+#10.Transitivity 
+
+transitivity_g1 <- transitivity(Advanced_Materials, type = "globalundirected")       #Calculate transitivity
+transitivity_g2 <- transitivity(Biotech, type = "globalundirected")
+transitivity_g3 <- transitivity(Microelectronics, type = "globalundirected")
+transitivity_g4 <- transitivity(Nanotech, type = "globalundirected") 
+transitivity_g5 <- transitivity(Photonics, type = "globalundirected")
+
+#    library(qgraph)
+#    smallworldness1 = smallworldness(Advanced_Materials, B = 250, up = 0.995, lo = 0.005)
+#    smallworldness1 = smallworldness(Biotech, B = 250, up = 0.995, lo = 0.005)
+#    smallworldness3 = smallworldness(Microelectronics, B = 250, up = 0.995, lo = 0.005)
+#    smallworldness4 = smallworldness(Nanotech, B = 250, up = 0.995, lo = 0.005)
+#    smallworldness5 = smallworldness(Photonics, B = 250, up = 0.995, lo = 0.005)
+
+
+#11 overall recap !!
+
+statistic <- c("Name", "Nodes", "Edges", "Components", "Diameter", "APL", "Density", "Cliques", "Inclusiveness", "Reachable Pairs", "Transitivity")
+df1 <- c("Advanced_Materials", gorder(Advanced_Materials), gsize(Advanced_Materials), comp_g1$no, d_g1[1], round(apl_g1,4), round(ed_g1[1],4), numcliques_g1[1], round(inclusiveness_g1[1],4), round(reach_g1[1],4), round(transitivity_g1[1],4))
+df2 <- c("Biotech", gorder(Biotech), gsize(Biotech), comp_g2$no, d_g2[1], round(apl_g2,4), round(ed_g2[1],4), numcliques_g2[1], round(inclusiveness_g2[1],4), round(reach_g2[1],4), round(transitivity_g2[1],4))
+df3 <- c("Microelectronics", gorder(Microelectronics), gsize(Microelectronics), comp_g3$no, d_g3[1], round(apl_g3,4), round(ed_g3[1],4), numcliques_g3[1], round(inclusiveness_g3[1],4), round(reach_g3[1],4), round(transitivity_g3[1],4))
+df4 <- c("Nanotech", gorder(Nanotech), gsize(Nanotech), comp_g4$no, d_g4[1], round(apl_g4,4), round(ed_g4[1],4), numcliques_g4[1], round(inclusiveness_g4[1],4), round(reach_g4[1],4), round(transitivity_g4[1],4))
+df5 <- c("Photonics", gorder(Photonics), gsize(Photonics), comp_g5$no, d_g5[1], round(apl_g5,4), round(ed_g5[1],4), numcliques_g5[1], round(inclusiveness_g5[1],4), round(reach_g5[1],4), round(transitivity_g5[1],4))
+df <- data.frame(statistic, df1, df2, df3, df4, df5)
+df
 
 
 #. Node-level Measures
-    
-    #Degree/Closeness/Betweenness/Constraint/ENS
-    
-    
-    g1.ID <- as.list(V(Advanced_Materials)$name)
-    g2.ID <- as.list(V(Biotech)$name)
-    g3.ID <- as.list(V(Microelectronics)$name)
-    g4.ID <- as.list(V(Nanotech)$name)
-    g5.ID <- as.list(V(Photonics)$name)
-    df1.ID = t(as.data.frame(g1.ID))
-    df2.ID = t(as.data.frame(g2.ID))
-    df3.ID = t(as.data.frame(g3.ID))
-    df4.ID = t(as.data.frame(g4.ID))
-    df5.ID = t(as.data.frame(g5.ID))
 
-    g1.Label <- (V(Advanced_Materials)$Label)
-    g2.Label <- (V(Biotech)$Label)
-    g3.Label <- (V(Microelectronics)$Label)
-    g4.Label <- (V(Nanotech)$Label)
-    g5.Label <- (V(Photonics)$Label)
-    df1.Label = as.data.frame(g1.Label)
-    df2.Label = as.data.frame(g2.Label)
-    df3.Label = as.data.frame(g3.Label)
-    df4.Label = as.data.frame(g4.Label)
-    df5.Label = as.data.frame(g5.Label)
-    
-    g1.OrgType <- V(Advanced_Materials)$OrgType
-    g2.OrgType <- V(Biotech)$OrgType
-    g3.OrgType <- V(Microelectronics)$OrgType
-    g4.OrgType <- V(Nanotech)$OrgType
-    g5.OrgType <- V(Photonics)$OrgType
-    df1.OrgType = as.data.frame(g1.OrgType)
-    df2.OrgType = as.data.frame(g2.OrgType)
-    df3.OrgType = as.data.frame(g3.OrgType)
-    df4.OrgType = as.data.frame(g4.OrgType)
-    df5.OrgType = as.data.frame(g5.OrgType)
-    
-    g1.deg <- degree(Advanced_Materials, normalized = FALSE)
-    g2.deg <- degree(Biotech, normalized = FALSE)
-    g3.deg <- degree(Microelectronics, normalized = FALSE)
-    g4.deg <- degree(Nanotech, normalized = FALSE)
-    g5.deg <- degree(Photonics, normalized = FALSE)
-    df1.deg <- as.data.frame(g1.deg)
-    df2.deg <- as.data.frame(g2.deg)    
-    df3.deg <- as.data.frame(g3.deg)    
-    df4.deg <- as.data.frame(g4.deg)
-    df5.deg <- as.data.frame(g5.deg)    
-    
-    g1.betw <- betweenness(Advanced_Materials, normalized = FALSE)
-    g2.betw <- betweenness(Biotech, normalized = FALSE)
-    g3.betw <- betweenness(Microelectronics, normalized = FALSE)
-    g4.betw <- betweenness(Nanotech, normalized = FALSE)
-    g5.betw <- betweenness(Photonics, normalized = FALSE)
-    df1.betw <- as.data.frame(g1.betw)
-    df2.betw <- as.data.frame(g2.betw)    
-    df3.betw <- as.data.frame(g3.betw)    
-    df4.betw <- as.data.frame(g4.betw)    
-    df5.betw <- as.data.frame(g5.betw)  
+#Degree/Closeness/Betweenness/Constraint/ENS
 
-    g1.eigen <- eigen_centrality(Advanced_Materials, directed = FALSE, scale = TRUE, weights = NULL, options = arpack_defaults)
-    g2.eigen <- eigen_centrality(Biotech, directed = FALSE, scale = TRUE, weights = NULL, options = arpack_defaults)
-    g3.eigen <- eigen_centrality(Microelectronics, directed = FALSE, scale = TRUE, weights = NULL, options = arpack_defaults)
-    g4.eigen <- eigen_centrality(Nanotech, directed = FALSE, scale = TRUE, weights = NULL, options = arpack_defaults)
-    g5.eigen <- eigen_centrality(Photonics, directed = FALSE, scale = TRUE, weights = NULL, options = arpack_defaults)
-    df1.eigen <- as.data.frame(round(g1.eigen$vector,4)* 1000)
-    df2.eigen <- as.data.frame(round(g2.eigen$vector,4)* 1000)  
-    df3.eigen <- as.data.frame(round(g3.eigen$vector,4)* 1000)
-    df4.eigen <- as.data.frame(round(g4.eigen$vector,4)* 1000)   
-    df5.eigen <- as.data.frame(round(g5.eigen$vector,4)* 1000)
 
-    g1.close <- closeness(Advanced_Materials, normalized = FALSE)
-    g2.close <- closeness(Biotech, normalized = FALSE)
-    g3.close <- closeness(Microelectronics, normalized = FALSE)
-    g4.close <- closeness(Nanotech, normalized = FALSE)
-    g5.close <- closeness(Photonics, normalized = FALSE)
-    df1.close <- as.data.frame(g1.close) 
-    df2.close <- as.data.frame(g2.close) 
-    df3.close <- as.data.frame(g3.close) 
-    df4.close <- as.data.frame(g4.close) 
-    df5.close <- as.data.frame(g5.close)
-    
-    g1.const <- 1 - constraint(Advanced_Materials)
-    g2.const <- 1 - constraint(Biotech)
-    g3.const <- 1 - constraint(Microelectronics)
-    g4.const <- 1 - constraint(Nanotech)
-    g5.const <- 1 - constraint(Photonics)
-    df1.const <- as.data.frame(g1.const)
-    df2.const <- as.data.frame(g2.const)
-    df3.const <- as.data.frame(g3.const)
-    df4.const <- as.data.frame(g4.const)
-    df5.const <- as.data.frame(g5.const)
-    
-    g1.ens <- influenceR::ens(Advanced_Materials)
-    g2.ens <- influenceR::ens(Biotech)
-    g3.ens <- influenceR::ens(Microelectronics)
-    g4.ens <- influenceR::ens(Nanotech)
-    g5.ens <- influenceR::ens(Photonics)
-    df1.ens <- as.data.frame(g1.ens)
-    df2.ens <- as.data.frame(g2.ens)
-    df3.ens <- as.data.frame(g3.ens)
-    df4.ens <- as.data.frame(g4.ens)
-    df5.ens <- as.data.frame(g5.ens)
-    statistic = c("ID", "Label", "OrgType", "Degree", "Betw", "Eigen", "Close", "Const", "ENS", "Sector")
-    
-    nodelevelmeasures_Advanced_Materials <- data.frame(df1.ID[,1], df1.Label, df1.OrgType, round(df1.deg,0), round(df1.betw,2), df1.eigen, round(df1.close,4), round(df1.const,3), round(df1.ens,3))
-    nodelevelmeasures_sorted_Advanced_Materials <- nodelevelmeasures_Advanced_Materials %>%
-      arrange(desc(g1.deg))
-    nodelevelmeasures_sorted_Advanced_Materials$Sector = "Advanced_Materials"
-    colnames(nodelevelmeasures_sorted_Advanced_Materials) <- statistic 
-    
-    nodelevelmeasures_Biotech <- data.frame(df2.ID[,1], df2.Label, df2.OrgType, round(df2.deg,0), round(df2.betw,2), df2.eigen, round(df2.close,4), round(df2.const,3), round(df2.ens,3))
-    nodelevelmeasures_sorted_Biotech <- nodelevelmeasures_Biotech %>%
-      arrange(desc(g2.deg))
-    nodelevelmeasures_sorted_Biotech$Sector = "Biotech"
-    colnames(nodelevelmeasures_sorted_Biotech) <- statistic 
-    
-    nodelevelmeasures_Microelectronics <- data.frame(df3.ID[,1], df3.Label, df3.OrgType, round(df3.deg,0), round(df3.betw,2), df3.eigen, round(df3.close,4), round(df3.const,3), round(df3.ens,3))
-    nodelevelmeasures_sorted_Microelectronics <- nodelevelmeasures_Microelectronics %>%
-      arrange(desc(g3.deg))
-    nodelevelmeasures_sorted_Microelectronics$Sector = "Microelectronics"
-    colnames(nodelevelmeasures_sorted_Microelectronics) <- statistic   
-    
-    nodelevelmeasures_Nanotech <- data.frame(df4.ID[,1], df4.Label, df4.OrgType, round(df4.deg,0), round(df4.betw,2), df4.eigen, round(df4.close,4), round(df4.const,3), round(df4.ens,3))
-    nodelevelmeasures_sorted_Nanotech <- nodelevelmeasures_Nanotech %>%
-      arrange(desc(g4.deg))
-    nodelevelmeasures_sorted_Nanotech$Sector = "Nanotech"
-    colnames(nodelevelmeasures_sorted_Nanotech) <- statistic 
-    
-    nodelevelmeasures_Photonics <- data.frame(df5.ID[,1], df5.Label, df5.OrgType, round(df5.deg,0), round(df5.betw,2), df5.eigen, round(df5.close,4), round(df5.const,3), round(df5.ens,3))
-    nodelevelmeasures_sorted_Photonics <- nodelevelmeasures_Photonics %>%
-      arrange(desc(g5.deg))
-    nodelevelmeasures_sorted_Photonics $Sector = "Photonics"
-    colnames(nodelevelmeasures_sorted_Photonics) <- statistic 
-    
-    
-    nodelevelmeasures <- rbind(nodelevelmeasures_sorted_Advanced_Materials, nodelevelmeasures_sorted_Biotech, nodelevelmeasures_sorted_Microelectronics, nodelevelmeasures_sorted_Nanotech, nodelevelmeasures_sorted_Photonics)
+g1.ID <- as.list(V(Advanced_Materials)$name)
+g2.ID <- as.list(V(Biotech)$name)
+g3.ID <- as.list(V(Microelectronics)$name)
+g4.ID <- as.list(V(Nanotech)$name)
+g5.ID <- as.list(V(Photonics)$name)
+df1.ID = t(as.data.frame(g1.ID))
+df2.ID = t(as.data.frame(g2.ID))
+df3.ID = t(as.data.frame(g3.ID))
+df4.ID = t(as.data.frame(g4.ID))
+df5.ID = t(as.data.frame(g5.ID))
 
-      # now lets get the l of avg centrality measures  by type of participants
-    
-    nodelevelmeasures_recap <- nodelevelmeasures %>%
-      group_by(OrgType, Sector) %>%
-      summarize(average_degree = round(mean(Degree),2))
-    nodelevelmeasures_degree = dcast(nodelevelmeasures_recap, OrgType ~ Sector, value.var = "average_degree")
-    nodelevelmeasures_degree
+g1.Label <- (V(Advanced_Materials)$Label)
+g2.Label <- (V(Biotech)$Label)
+g3.Label <- (V(Microelectronics)$Label)
+g4.Label <- (V(Nanotech)$Label)
+g5.Label <- (V(Photonics)$Label)
+df1.Label = as.data.frame(g1.Label)
+df2.Label = as.data.frame(g2.Label)
+df3.Label = as.data.frame(g3.Label)
+df4.Label = as.data.frame(g4.Label)
+df5.Label = as.data.frame(g5.Label)
 
-    nodelevelmeasures_recap <- nodelevelmeasures %>%
-      group_by(OrgType, Sector) %>%
-      summarize(average_betw = round(mean(Betw),2))
-    nodelevelmeasures_betw = dcast(nodelevelmeasures_recap, OrgType ~ Sector, value.var = "average_betw")
-    nodelevelmeasures_betw
+g1.OrgType <- V(Advanced_Materials)$OrgType
+g2.OrgType <- V(Biotech)$OrgType
+g3.OrgType <- V(Microelectronics)$OrgType
+g4.OrgType <- V(Nanotech)$OrgType
+g5.OrgType <- V(Photonics)$OrgType
+df1.OrgType = as.data.frame(g1.OrgType)
+df2.OrgType = as.data.frame(g2.OrgType)
+df3.OrgType = as.data.frame(g3.OrgType)
+df4.OrgType = as.data.frame(g4.OrgType)
+df5.OrgType = as.data.frame(g5.OrgType)
 
-    nodelevelmeasures_recap <- nodelevelmeasures %>%
-      group_by(OrgType, Sector) %>%
-      summarize(average_eigen = round(mean(Eigen),2))
-    nodelevelmeasures_eigen = dcast(nodelevelmeasures_recap, OrgType ~ Sector, value.var = "average_eigen")
-    nodelevelmeasures_eigen
-  
-    nodelevelmeasures_recap <- nodelevelmeasures %>%
-      group_by(OrgType, Sector) %>%
-      summarize(average_close = 1000000 * round(mean(Close),4))
-    nodelevelmeasures_Close = dcast(nodelevelmeasures_recap, OrgType ~ Sector, value.var = "average_close")
-    nodelevelmeasures_Close
-    
-    nodelevelmeasures_recap <- nodelevelmeasures %>%
-      group_by(OrgType, Sector) %>%
-      summarize(average_const = round(mean(Const),2))
-    nodelevelmeasures_const = dcast(nodelevelmeasures_recap, OrgType ~ Sector, value.var = "average_const")
-    nodelevelmeasures_const
-    
-    nodelevelmeasures_recap <- nodelevelmeasures %>%
-      group_by(OrgType, Sector) %>%
-      summarize(average_ENS = round(mean(ENS),2))
-    nodelevelmeasures_ENS = dcast(nodelevelmeasures_recap, OrgType ~ Sector, value.var = "average_ENS")
-    nodelevelmeasures_ENS
+g1.deg <- degree(Advanced_Materials, normalized = FALSE)
+g2.deg <- degree(Biotech, normalized = FALSE)
+g3.deg <- degree(Microelectronics, normalized = FALSE)
+g4.deg <- degree(Nanotech, normalized = FALSE)
+g5.deg <- degree(Photonics, normalized = FALSE)
+df1.deg <- as.data.frame(g1.deg)
+df2.deg <- as.data.frame(g2.deg)    
+df3.deg <- as.data.frame(g3.deg)    
+df4.deg <- as.data.frame(g4.deg)
+df5.deg <- as.data.frame(g5.deg)    
 
-    
-    
-    # a view on top 10 eigenvalue centralty nodes per network - any crossovers ?
+g1.betw <- betweenness(Advanced_Materials, normalized = FALSE)
+g2.betw <- betweenness(Biotech, normalized = FALSE)
+g3.betw <- betweenness(Microelectronics, normalized = FALSE)
+g4.betw <- betweenness(Nanotech, normalized = FALSE)
+g5.betw <- betweenness(Photonics, normalized = FALSE)
+df1.betw <- as.data.frame(g1.betw)
+df2.betw <- as.data.frame(g2.betw)    
+df3.betw <- as.data.frame(g3.betw)    
+df4.betw <- as.data.frame(g4.betw)    
+df5.betw <- as.data.frame(g5.betw)  
 
-    top10_Advanced_Materials_eigen <- nodelevelmeasures %>%
-      filter(Sector == "Advanced_Materials") %>%
-      group_by(Eigen) %>%
-      arrange(desc(Eigen)) %>%
-      ungroup %>%
-      slice(1:30)  %>%
-      select(OrgType, Label, ID, Eigen)
-    top10_Advanced_Materials_eigen
-    
-    top10_Biotech_eigen <- nodelevelmeasures %>%
-      filter(Sector == "Biotech") %>%
-      group_by(Eigen) %>%
-      arrange(desc(Eigen)) %>%
-      ungroup %>%
-      slice(1:30)  %>%
-      select(OrgType, Label, ID, Eigen)
-    top10_Biotech_eigen
-    
-    top10_Microelectronics_eigen <- nodelevelmeasures %>%
-      filter(Sector == "Microelectronics") %>%
-      group_by(Eigen) %>%
-      arrange(desc(Eigen)) %>%
-      ungroup %>%
-      slice(1:30)  %>%
-      select(OrgType, Label, ID, Eigen)
-    top10_Microelectronics_eigen
-    
-    top10_Nanotech_eigen <- nodelevelmeasures %>%
-      filter(Sector == "Nanotech") %>%
-      group_by(Eigen) %>%
-      arrange(desc(Eigen)) %>%
-      ungroup %>%
-      slice(1:30)  %>%
-      select(OrgType, Label, ID, Eigen)
-    top10_Nanotech_eigen
-    
-    top10_Photonics_eigen <- nodelevelmeasures %>%
-      filter(Sector == "Photonics") %>%
-      group_by(ID, Eigen) %>%
-      arrange(desc(Eigen)) %>%
-      ungroup %>%
-      slice(1:30)  %>%
-      select(OrgType, Label, ID, Eigen)
-    top10_Photonics_eigen
+g1.eigen <- eigen_centrality(Advanced_Materials, directed = FALSE, scale = TRUE, weights = NULL, options = arpack_defaults)
+g2.eigen <- eigen_centrality(Biotech, directed = FALSE, scale = TRUE, weights = NULL, options = arpack_defaults)
+g3.eigen <- eigen_centrality(Microelectronics, directed = FALSE, scale = TRUE, weights = NULL, options = arpack_defaults)
+g4.eigen <- eigen_centrality(Nanotech, directed = FALSE, scale = TRUE, weights = NULL, options = arpack_defaults)
+g5.eigen <- eigen_centrality(Photonics, directed = FALSE, scale = TRUE, weights = NULL, options = arpack_defaults)
+df1.eigen <- as.data.frame(round(g1.eigen$vector,4)* 1000)
+df2.eigen <- as.data.frame(round(g2.eigen$vector,4)* 1000)  
+df3.eigen <- as.data.frame(round(g3.eigen$vector,4)* 1000)
+df4.eigen <- as.data.frame(round(g4.eigen$vector,4)* 1000)   
+df5.eigen <- as.data.frame(round(g5.eigen$vector,4)* 1000)
 
-    
-    top50 <- nodelevelmeasures %>%
-      group_by(Eigen) %>%
-      arrange(desc(Eigen)) %>%
-      ungroup %>%
-      slice(1:50)  %>%
-      select(OrgType, Label, ID, Eigen)
-    top50
-    
-    
-    # Lets add to the graph:
-    #- - - - - - - -  # color
+g1.close <- closeness(Advanced_Materials, normalized = FALSE)
+g2.close <- closeness(Biotech, normalized = FALSE)
+g3.close <- closeness(Microelectronics, normalized = FALSE)
+g4.close <- closeness(Nanotech, normalized = FALSE)
+g5.close <- closeness(Photonics, normalized = FALSE)
+df1.close <- as.data.frame(g1.close) 
+df2.close <- as.data.frame(g2.close) 
+df3.close <- as.data.frame(g3.close) 
+df4.close <- as.data.frame(g4.close) 
+df5.close <- as.data.frame(g5.close)
+
+g1.const <- 1 - constraint(Advanced_Materials)
+g2.const <- 1 - constraint(Biotech)
+g3.const <- 1 - constraint(Microelectronics)
+g4.const <- 1 - constraint(Nanotech)
+g5.const <- 1 - constraint(Photonics)
+df1.const <- as.data.frame(g1.const)
+df2.const <- as.data.frame(g2.const)
+df3.const <- as.data.frame(g3.const)
+df4.const <- as.data.frame(g4.const)
+df5.const <- as.data.frame(g5.const)
+
+g1.ens <- influenceR::ens(Advanced_Materials)
+g2.ens <- influenceR::ens(Biotech)
+g3.ens <- influenceR::ens(Microelectronics)
+g4.ens <- influenceR::ens(Nanotech)
+g5.ens <- influenceR::ens(Photonics)
+df1.ens <- as.data.frame(g1.ens)
+df2.ens <- as.data.frame(g2.ens)
+df3.ens <- as.data.frame(g3.ens)
+df4.ens <- as.data.frame(g4.ens)
+df5.ens <- as.data.frame(g5.ens)
+statistic = c("ID", "Label", "OrgType", "Degree", "Betw", "Eigen", "Close", "Const", "ENS", "Sector")
+
+nodelevelmeasures_Advanced_Materials <- data.frame(df1.ID[,1], df1.Label, df1.OrgType, round(df1.deg,0), round(df1.betw,2), df1.eigen, round(df1.close,4), round(df1.const,3), round(df1.ens,3))
+nodelevelmeasures_sorted_Advanced_Materials <- nodelevelmeasures_Advanced_Materials %>%
+  arrange(desc(g1.deg))
+nodelevelmeasures_sorted_Advanced_Materials$Sector = "Advanced_Materials"
+colnames(nodelevelmeasures_sorted_Advanced_Materials) <- statistic 
+
+nodelevelmeasures_Biotech <- data.frame(df2.ID[,1], df2.Label, df2.OrgType, round(df2.deg,0), round(df2.betw,2), df2.eigen, round(df2.close,4), round(df2.const,3), round(df2.ens,3))
+nodelevelmeasures_sorted_Biotech <- nodelevelmeasures_Biotech %>%
+  arrange(desc(g2.deg))
+nodelevelmeasures_sorted_Biotech$Sector = "Biotech"
+colnames(nodelevelmeasures_sorted_Biotech) <- statistic 
+
+nodelevelmeasures_Microelectronics <- data.frame(df3.ID[,1], df3.Label, df3.OrgType, round(df3.deg,0), round(df3.betw,2), df3.eigen, round(df3.close,4), round(df3.const,3), round(df3.ens,3))
+nodelevelmeasures_sorted_Microelectronics <- nodelevelmeasures_Microelectronics %>%
+  arrange(desc(g3.deg))
+nodelevelmeasures_sorted_Microelectronics$Sector = "Microelectronics"
+colnames(nodelevelmeasures_sorted_Microelectronics) <- statistic   
+
+nodelevelmeasures_Nanotech <- data.frame(df4.ID[,1], df4.Label, df4.OrgType, round(df4.deg,0), round(df4.betw,2), df4.eigen, round(df4.close,4), round(df4.const,3), round(df4.ens,3))
+nodelevelmeasures_sorted_Nanotech <- nodelevelmeasures_Nanotech %>%
+  arrange(desc(g4.deg))
+nodelevelmeasures_sorted_Nanotech$Sector = "Nanotech"
+colnames(nodelevelmeasures_sorted_Nanotech) <- statistic 
+
+nodelevelmeasures_Photonics <- data.frame(df5.ID[,1], df5.Label, df5.OrgType, round(df5.deg,0), round(df5.betw,2), df5.eigen, round(df5.close,4), round(df5.const,3), round(df5.ens,3))
+nodelevelmeasures_sorted_Photonics <- nodelevelmeasures_Photonics %>%
+  arrange(desc(g5.deg))
+nodelevelmeasures_sorted_Photonics $Sector = "Photonics"
+colnames(nodelevelmeasures_sorted_Photonics) <- statistic 
+
+
+nodelevelmeasures <- rbind(nodelevelmeasures_sorted_Advanced_Materials, nodelevelmeasures_sorted_Biotech, nodelevelmeasures_sorted_Microelectronics, nodelevelmeasures_sorted_Nanotech, nodelevelmeasures_sorted_Photonics)
+
+# now lets get the l of avg centrality measures  by type of participants
+
+nodelevelmeasures_recap <- nodelevelmeasures %>%
+  group_by(OrgType, Sector) %>%
+  summarize(average_degree = round(mean(Degree),2))
+nodelevelmeasures_degree = dcast(nodelevelmeasures_recap, OrgType ~ Sector, value.var = "average_degree")
+nodelevelmeasures_degree
+
+nodelevelmeasures_recap <- nodelevelmeasures %>%
+  group_by(OrgType, Sector) %>%
+  summarize(average_betw = round(mean(Betw),2))
+nodelevelmeasures_betw = dcast(nodelevelmeasures_recap, OrgType ~ Sector, value.var = "average_betw")
+nodelevelmeasures_betw
+
+nodelevelmeasures_recap <- nodelevelmeasures %>%
+  group_by(OrgType, Sector) %>%
+  summarize(average_eigen = round(mean(Eigen),2))
+nodelevelmeasures_eigen = dcast(nodelevelmeasures_recap, OrgType ~ Sector, value.var = "average_eigen")
+nodelevelmeasures_eigen
+
+nodelevelmeasures_recap <- nodelevelmeasures %>%
+  group_by(OrgType, Sector) %>%
+  summarize(average_close = 1000000 * round(mean(Close),4))
+nodelevelmeasures_Close = dcast(nodelevelmeasures_recap, OrgType ~ Sector, value.var = "average_close")
+nodelevelmeasures_Close
+
+nodelevelmeasures_recap <- nodelevelmeasures %>%
+  group_by(OrgType, Sector) %>%
+  summarize(average_const = round(mean(Const),2))
+nodelevelmeasures_const = dcast(nodelevelmeasures_recap, OrgType ~ Sector, value.var = "average_const")
+nodelevelmeasures_const
+
+nodelevelmeasures_recap <- nodelevelmeasures %>%
+  group_by(OrgType, Sector) %>%
+  summarize(average_ENS = round(mean(ENS),2))
+nodelevelmeasures_ENS = dcast(nodelevelmeasures_recap, OrgType ~ Sector, value.var = "average_ENS")
+nodelevelmeasures_ENS
+
+
+
+# a view on top 10 eigenvalue centralty nodes per network - any crossovers ?
+
+top10_Advanced_Materials_eigen <- nodelevelmeasures %>%
+  filter(Sector == "Advanced_Materials") %>%
+  group_by(Eigen) %>%
+  arrange(desc(Eigen)) %>%
+  ungroup %>%
+  slice(1:30)  %>%
+  select(OrgType, Label, ID, Eigen)
+top10_Advanced_Materials_eigen
+
+top10_Biotech_eigen <- nodelevelmeasures %>%
+  filter(Sector == "Biotech") %>%
+  group_by(Eigen) %>%
+  arrange(desc(Eigen)) %>%
+  ungroup %>%
+  slice(1:30)  %>%
+  select(OrgType, Label, ID, Eigen)
+top10_Biotech_eigen
+
+top10_Microelectronics_eigen <- nodelevelmeasures %>%
+  filter(Sector == "Microelectronics") %>%
+  group_by(Eigen) %>%
+  arrange(desc(Eigen)) %>%
+  ungroup %>%
+  slice(1:30)  %>%
+  select(OrgType, Label, ID, Eigen)
+top10_Microelectronics_eigen
+
+top10_Nanotech_eigen <- nodelevelmeasures %>%
+  filter(Sector == "Nanotech") %>%
+  group_by(Eigen) %>%
+  arrange(desc(Eigen)) %>%
+  ungroup %>%
+  slice(1:30)  %>%
+  select(OrgType, Label, ID, Eigen)
+top10_Nanotech_eigen
+
+top10_Photonics_eigen <- nodelevelmeasures %>%
+  filter(Sector == "Photonics") %>%
+  group_by(ID, Eigen) %>%
+  arrange(desc(Eigen)) %>%
+  ungroup %>%
+  slice(1:30)  %>%
+  select(OrgType, Label, ID, Eigen)
+top10_Photonics_eigen
+
+
+top50 <- nodelevelmeasures %>%
+  group_by(Eigen) %>%
+  arrange(desc(Eigen)) %>%
+  ungroup %>%
+  slice(1:50)  %>%
+  select(OrgType, Label, ID, Eigen)
+top50
+
+
+# Lets add to the graph:
+#- - - - - - - -  # color
 colour_code <- data.frame( ID=1:10,
                            code=c("IND", "CON", "PNP", "ROR", "RH", "GOV", "EDU", "OTH", "N/A", "NCL"),
                            sector=c("Industry", "Consulting", "Private Non-Profit", "Research Organisation", "Research Hospital", "Government", "Education", "Other", "Not Applicable", "Non Commercial Organisation"),
                            colour=c("red", "pink", "violet", "blue", "lightblue", "green", "yellow", "black", "grey", "brown") )
 
-    # Advanced_Materials
-    my_list1 = as.data.frame(V(Advanced_Materials)$OrgType)
-    names(my_list1)[1] <- "code"
-    my_list11 = my_list1
-    my_list11 <- my_list11 %>%
-      left_join(colour_code, by = "code") %>%
-      select("sector")
-    #my_list11
-    my_list12 = my_list1
-    my_list12 <- my_list1 %>%
-      left_join(colour_code, by = "code") %>%
-      select("colour")
-    #my_list12
-    V(Advanced_Materials)$OrgType2 <- my_list11$sector
-    V(Advanced_Materials)$color <- my_list12$colour
-    
-    # Biotech
-    my_list2 = as.data.frame(V(Biotech)$OrgType)
-    names(my_list2)[1] <- "code"
-    my_list21 = my_list2
-    my_list21 <- my_list21 %>%
-      left_join(colour_code, by = "code") %>%
-      select("sector")
-    #my_list21
-    my_list22 = my_list2
-    my_list22 <- my_list2 %>%
-      left_join(colour_code, by = "code") %>%
-      select("colour")
-    #my_list12
-    V(Biotech)$OrgType2 <- my_list21$sector
-    V(Biotech)$color <- my_list22$colour
-    
-    # Microelectronics
-    my_list3 = as.data.frame(V(Microelectronics)$OrgType)
-    names(my_list3)[1] <- "code"
-    my_list31 = my_list3
-    my_list31 <- my_list31 %>%
-      left_join(colour_code, by = "code") %>%
-      select("sector")
-    #my_list31
-    my_list32 = my_list3
-    my_list32 <- my_list3 %>%
-      left_join(colour_code, by = "code") %>%
-      select("colour")
-    #my_list32
-    V(Microelectronics)$OrgType2 <- my_list31$sector
-    V(Microelectronics)$color <- my_list32$colour
-    
-    # Nanotech
-    my_list4 = as.data.frame(V(Nanotech)$OrgType)
-    names(my_list4)[1] <- "code"
-    my_list41 = my_list4
-    my_list41 <- my_list41 %>%
-      left_join(colour_code, by = "code") %>%
-      select("sector")
-    #my_list41
-    my_list42 = my_list4
-    my_list42 <- my_list4 %>%
-      left_join(colour_code, by = "code") %>%
-      select("colour")
-    #my_list42
-    V(Nanotech)$OrgType2 <- my_list41$sector
-    V(Nanotech)$color <- my_list42$colour
-    
-    # Photonics
-    my_list5 = as.data.frame(V(Photonics)$OrgType)
-    names(my_list5)[1] <- "code"
-    my_list51 = my_list5
-    my_list51 <- my_list51 %>%
-      left_join(colour_code, by = "code") %>%
-      select("sector")
-    #my_list51
-    my_list52 = my_list5
-    my_list52 <- my_list5 %>%
-      left_join(colour_code, by = "code") %>%
-      select("colour")
-    #my_list52
-    V(Photonics)$OrgType2 <- my_list51$sector
-    V(Photonics)$color <- my_list52$colour
-    
-    #  - - - - - - - -  # other attributes
-    
-    V(Advanced_Materials)$degree <- degree(Advanced_Materials, normalized = FALSE)
-    V(Biotech)$degree <- degree(Biotech, normalized = FALSE)
-    V(Microelectronics)$degree <- degree(Microelectronics, normalized = FALSE)
-    V(Nanotech)$degree <- degree(Nanotech, normalized = FALSE)
-    V(Photonics)$degree <- degree(Photonics, normalized = FALSE)
-    V(Advanced_Materials)$size <- log(V(Advanced_Materials)$degree)*1.25      
-    V(Biotech)$size <- log(V(Biotech)$degree)*1.25      
-    V(Microelectronics)$size <- log(V(Microelectronics)$degree)*1.25      
-    V(Nanotech)$size <- log(V(Nanotech)$degree)*1.25      
-    V(Photonics)$size <- log(V(Photonics)$degree)*1.25
-    
-    #Lets put eigenvale as attribute size
-    
-    colnames(df1.eigen) <- c("Eigenvalue")
-    colnames(df2.eigen) <- c("Eigenvalue")
-    colnames(df3.eigen) <- c("Eigenvalue")
-    colnames(df4.eigen) <- c("Eigenvalue")
-    colnames(df5.eigen) <- c("Eigenvalue")
-    
-    V(Advanced_Materials)$eigen = df1.eigen$Eigenvalue
-    V(Biotech)$eigen = df2.eigen$Eigenvalue
-    V(Microelectronics)$eigen = df3.eigen$Eigenvalue
-    V(Nanotech)$eigen = df4.eigen$Eigenvalue
-    V(Photonics)$eigen = df5.eigen$Eigenvalue
-    
-    V(Advanced_Materials)$size <- sqrt(V(Advanced_Materials)$eigen)/5
-    V(Biotech)$size <- sqrt(V(Biotech)$eigen)/3
-    V(Microelectronics)$size <- sqrt(V(Microelectronics)$eigen)/5
-    V(Nanotech)$size <- sqrt(V(Nanotech)$eigen)/2
-    V(Photonics)$size <- sqrt(V(Photonics)$eigen)/2
+# Advanced_Materials
+my_list1 = as.data.frame(V(Advanced_Materials)$OrgType)
+names(my_list1)[1] <- "code"
+my_list11 = my_list1
+my_list11 <- my_list11 %>%
+  left_join(colour_code, by = "code") %>%
+  select("sector")
+#my_list11
+my_list12 = my_list1
+my_list12 <- my_list1 %>%
+  left_join(colour_code, by = "code") %>%
+  select("colour")
+#my_list12
+V(Advanced_Materials)$OrgType2 <- my_list11$sector
+V(Advanced_Materials)$color <- my_list12$colour
 
-    #   - - - - - - - -  # Lets graph
-    
-    
-    #l_kk <- layout_with_kk(Advanced_Materials)                                           #Kamada-Kawai layout
-    #plot(Advanced_Materials, layout = l_kk, vertex.label=NA, main = "Advanced Materials")       
-    #l_kk <- layout_with_kk(Biotech)                                      
-    #plot(Biotech, layout = l_kk, vertex.label=NA, main = "Biotech")       
-    #l_kk <- layout_with_kk(Microelectronics) 
-    #plot(Microelectronics, layout = l_kk, vertex.label=NA, main = "Microelectronics")       
-    #l_kk <- layout_with_kk(Nanotech) 
-    #plot(Nanotech, layout = l_kk, vertex.label=NA, main = "Nanotech")       
-    #l_kk <- layout_with_kk(Photonics) 
-    #plot(Photonics, layout = l_kk, vertex.label=NA, main = "Photonics")       
+# Biotech
+my_list2 = as.data.frame(V(Biotech)$OrgType)
+names(my_list2)[1] <- "code"
+my_list21 = my_list2
+my_list21 <- my_list21 %>%
+  left_join(colour_code, by = "code") %>%
+  select("sector")
+#my_list21
+my_list22 = my_list2
+my_list22 <- my_list2 %>%
+  left_join(colour_code, by = "code") %>%
+  select("colour")
+#my_list12
+V(Biotech)$OrgType2 <- my_list21$sector
+V(Biotech)$color <- my_list22$colour
 
-    setwd("C:/Users/Gildas/OneDrive/MSC SUSDEV/NAI/NAI Individual Assignement")
-    pdf("C:/Users/Gildas/OneDrive/MSC SUSDEV/NAI/NAI Individual Assignement/Advanced_Materials.pdf") 
-    l_nicely <- layout_nicely(Advanced_Materials)                                                       #Kamada-Kawai layout
-    plot(Advanced_Materials, layout = l_nicely, vertex.label=NA, main = "Advanced Materials")
-    dev.off()
-    
-    pdf("C:/Users/Gildas/OneDrive/MSC SUSDEV/NAI/NAI Individual Assignement/Biotech.pdf")     
-    l_nicely <- layout_nicely(Biotech)                                      
-    plot(Biotech, layout = l_nicely, vertex.label=NA, main = "Biotech")     
-    dev.off()
-    
-    pdf("C:/Users/Gildas/OneDrive/MSC SUSDEV/NAI/NAI Individual Assignement/Microelectronics.pdf") 
-    l_nicely <- layout_nicely(Microelectronics) 
-    plot(Microelectronics, layout = l_nicely, vertex.label=NA, main = "Microelectronics")       
-    dev.off()
-    
-    pdf("C:/Users/Gildas/OneDrive/MSC SUSDEV/NAI/NAI Individual Assignement/Nanotech.pdf") 
-    l_nicely <- layout_nicely(Nanotech) 
-    plot(Nanotech, layout = l_nicely, vertex.label=NA, main = "Nanotech")       
-    dev.off()
-    
-    pdf("C:/Users/Gildas/OneDrive/MSC SUSDEV/NAI/NAI Individual Assignement/Photonics.pdf") 
-    l_nicely <- layout_nicely(Photonics) 
-    plot(Photonics, layout = l_nicely, vertex.label=NA, main = "Photonics")
-    dev.off()
+# Microelectronics
+my_list3 = as.data.frame(V(Microelectronics)$OrgType)
+names(my_list3)[1] <- "code"
+my_list31 = my_list3
+my_list31 <- my_list31 %>%
+  left_join(colour_code, by = "code") %>%
+  select("sector")
+#my_list31
+my_list32 = my_list3
+my_list32 <- my_list3 %>%
+  left_join(colour_code, by = "code") %>%
+  select("colour")
+#my_list32
+V(Microelectronics)$OrgType2 <- my_list31$sector
+V(Microelectronics)$color <- my_list32$colour
 
-  V(Advanced_Materials)
-    l_nicely <- layout_nicely(Advanced_Materials)                                                       #Kamada-Kawai layout
-    plot(Advanced_Materials, layout = l_nicely, vertex.label=NA, main = "Advanced Materials")
-  V(Biotech)
-    layout_fr <-layout_with_fr(Biotech)
-    plot(Biotech, layout = layout_fr, vertex.label=NA, main = "Biotech")  
-    
-    layout_drl <- layout_with_drl(Biotech)
-    plot(Biotech, layout = layout_drl, vertex.label=NA, main = "Biotech")  
-    
-    layout_tree <- layout_as_tree(Biotech)
-    plot(Biotech, layout = layout_tree, vertex.label=NA, main = "Biotech")  
-    
-    layout_dh <- layout_with_dh(Biotech)
-    plot(Biotech, layout = layout_dh, vertex.label=NA, main = "Biotech")  
-    
-    layout_gem <- layout_with_gem(Biotech)
-    plot(Biotech, layout = layout_gem, vertex.label=NA, main = "Biotech")  
-    
-    layout_graphopt <- layout_with_graphopt(Biotech)
-    plot(Biotech, layout = layout_graphopt, vertex.label=NA, main = "Biotech")  
-    
-    layout_lgl <- layout_with_lgl(Biotech)
-    plot(Biotech, layout = layout_lgl, vertex.label=NA, main = "Biotech")  
-    
-    layout_mds <- layout_with_mds(Biotech)
-    plot(Biotech, layout = layout_mds, vertex.label=NA, main = "Biotech")  
-    
-    layout_sugi <- layout_with_sygiyama(Biotech)
-    plot(Biotech, layout = layout_sugi, vertex.label=NA, main = "Biotech")  
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    #. 4.7 Observed brokerage properties
-    
-    library(sna)
-    library(influenceR)
-                                   #Get the adjacency matrix    
-    Advanced_Materials_adj <- get.adjacency(Advanced_Materials, sparse = F)
-    Biotech_adj <- get.adjacency(Biotech, sparse = F)
-    Microelectronics_adj <- get.adjacency(Microelectronics, sparse = F)
-    Nanotech_adj <- get.adjacency(Nanotech, sparse = F)
-    Photonics_adj <- get.adjacency(Photonics, sparse = F)
+# Nanotech
+my_list4 = as.data.frame(V(Nanotech)$OrgType)
+names(my_list4)[1] <- "code"
+my_list41 = my_list4
+my_list41 <- my_list41 %>%
+  left_join(colour_code, by = "code") %>%
+  select("sector")
+#my_list41
+my_list42 = my_list4
+my_list42 <- my_list4 %>%
+  left_join(colour_code, by = "code") %>%
+  select("colour")
+#my_list42
+V(Nanotech)$OrgType2 <- my_list41$sector
+V(Nanotech)$color <- my_list42$colour
 
-    #help("get.adjacency")                                                  #Explore this function
-    
-    br1 <- sna::brokerage(Advanced_Materials_adj, V(Advanced_Materials)$OrgType2)                       #Calculate brokerage measures, 
-    br2 <- sna::brokerage(Biotech_adj, V(Biotech)$OrgType2)                                  
-    br3 <- sna::brokerage(Microelectronics_adj, V(Microelectronics)$OrgType2)                  
-    br4 <- sna::brokerage(Nanotech_adj, V(Nanotech)$OrgType2)                                 
-    br5 <- sna::brokerage(Photonics_adj, V(Photonics)$OrgType2)                               
+# Photonics
+my_list5 = as.data.frame(V(Photonics)$OrgType)
+names(my_list5)[1] <- "code"
+my_list51 = my_list5
+my_list51 <- my_list51 %>%
+  left_join(colour_code, by = "code") %>%
+  select("sector")
+#my_list51
+my_list52 = my_list5
+my_list52 <- my_list5 %>%
+  left_join(colour_code, by = "code") %>%
+  select("colour")
+#my_list52
+V(Photonics)$OrgType2 <- my_list51$sector
+V(Photonics)$color <- my_list52$colour
 
-    br1$exp.grp	
-    br2$exp.grp	
-    br3$exp.grp	
-    br4$exp.grp	
-    br5$exp.grp	
-    
-    
-    
-    
+#  - - - - - - - -  # other attributes
+
+V(Advanced_Materials)$degree <- degree(Advanced_Materials, normalized = FALSE)
+V(Biotech)$degree <- degree(Biotech, normalized = FALSE)
+V(Microelectronics)$degree <- degree(Microelectronics, normalized = FALSE)
+V(Nanotech)$degree <- degree(Nanotech, normalized = FALSE)
+V(Photonics)$degree <- degree(Photonics, normalized = FALSE)
+V(Advanced_Materials)$size <- log(V(Advanced_Materials)$degree)*1.25      
+V(Biotech)$size <- log(V(Biotech)$degree)*1.25      
+V(Microelectronics)$size <- log(V(Microelectronics)$degree)*1.25      
+V(Nanotech)$size <- log(V(Nanotech)$degree)*1.25      
+V(Photonics)$size <- log(V(Photonics)$degree)*1.25
+
+#Lets put eigenvale as attribute size
+
+colnames(df1.eigen) <- c("Eigenvalue")
+colnames(df2.eigen) <- c("Eigenvalue")
+colnames(df3.eigen) <- c("Eigenvalue")
+colnames(df4.eigen) <- c("Eigenvalue")
+colnames(df5.eigen) <- c("Eigenvalue")
+
+V(Advanced_Materials)$eigen = df1.eigen$Eigenvalue
+V(Biotech)$eigen = df2.eigen$Eigenvalue
+V(Microelectronics)$eigen = df3.eigen$Eigenvalue
+V(Nanotech)$eigen = df4.eigen$Eigenvalue
+V(Photonics)$eigen = df5.eigen$Eigenvalue
+
+V(Advanced_Materials)$size <- sqrt(V(Advanced_Materials)$eigen)/5
+V(Biotech)$size <- sqrt(V(Biotech)$eigen)/3
+V(Microelectronics)$size <- sqrt(V(Microelectronics)$eigen)/5
+V(Nanotech)$size <- sqrt(V(Nanotech)$eigen)/2
+V(Photonics)$size <- sqrt(V(Photonics)$eigen)/2
+
+#   - - - - - - - -  # Lets graph
+
+
+#l_kk <- layout_with_kk(Advanced_Materials)                                           #Kamada-Kawai layout
+#plot(Advanced_Materials, layout = l_kk, vertex.label=NA, main = "Advanced Materials")       
+#l_kk <- layout_with_kk(Biotech)                                      
+#plot(Biotech, layout = l_kk, vertex.label=NA, main = "Biotech")       
+#l_kk <- layout_with_kk(Microelectronics) 
+#plot(Microelectronics, layout = l_kk, vertex.label=NA, main = "Microelectronics")       
+#l_kk <- layout_with_kk(Nanotech) 
+#plot(Nanotech, layout = l_kk, vertex.label=NA, main = "Nanotech")       
+#l_kk <- layout_with_kk(Photonics) 
+#plot(Photonics, layout = l_kk, vertex.label=NA, main = "Photonics")       
+
+setwd("C:/Users/Gildas/OneDrive/MSC SUSDEV/NAI/NAI Individual Assignement")
+pdf("C:/Users/Gildas/OneDrive/MSC SUSDEV/NAI/NAI Individual Assignement/Advanced_Materials.pdf") 
+l_nicely <- layout_nicely(Advanced_Materials)                                                       #Kamada-Kawai layout
+plot(Advanced_Materials, layout = l_nicely, vertex.label=NA, main = "Advanced Materials")
+dev.off()
+
+pdf("C:/Users/Gildas/OneDrive/MSC SUSDEV/NAI/NAI Individual Assignement/Biotech.pdf")     
+l_nicely <- layout_nicely(Biotech)                                      
+plot(Biotech, layout = l_nicely, vertex.label=NA, main = "Biotech")     
+dev.off()
+
+pdf("C:/Users/Gildas/OneDrive/MSC SUSDEV/NAI/NAI Individual Assignement/Microelectronics.pdf") 
+l_nicely <- layout_nicely(Microelectronics) 
+plot(Microelectronics, layout = l_nicely, vertex.label=NA, main = "Microelectronics")       
+dev.off()
+
+pdf("C:/Users/Gildas/OneDrive/MSC SUSDEV/NAI/NAI Individual Assignement/Nanotech.pdf") 
+l_nicely <- layout_nicely(Nanotech) 
+plot(Nanotech, layout = l_nicely, vertex.label=NA, main = "Nanotech")       
+dev.off()
+
+pdf("C:/Users/Gildas/OneDrive/MSC SUSDEV/NAI/NAI Individual Assignement/Photonics.pdf") 
+l_nicely <- layout_nicely(Photonics) 
+plot(Photonics, layout = l_nicely, vertex.label=NA, main = "Photonics")
+dev.off()
+
+V(Advanced_Materials)
+l_nicely <- layout_nicely(Advanced_Materials)                                                       #Kamada-Kawai layout
+plot(Advanced_Materials, layout = l_nicely, vertex.label=NA, main = "Advanced Materials")
+V(Biotech)
+layout_fr <-layout_with_fr(Biotech)
+plot(Biotech, layout = layout_fr, vertex.label=NA, main = "Biotech")  
+
+layout_drl <- layout_with_drl(Biotech)
+plot(Biotech, layout = layout_drl, vertex.label=NA, main = "Biotech")  
+
+layout_tree <- layout_as_tree(Biotech)
+plot(Biotech, layout = layout_tree, vertex.label=NA, main = "Biotech")  
+
+#maping using graphopt
+help("layout_with_graphopt")
+pdf("C:/Users/Gildas/OneDrive/MSC SUSDEV/NAI/NAI Individual Assignement/Advanced_Materials.pdf") 
+layout_graphopt <- layout_with_graphopt(Advanced_Materials)
+plot(Advanced_Materials, layout = layout_graphopt, vertex.label=NA, main = "Advanced Materials")  
+dev.off()
+
+pdf("C:/Users/Gildas/OneDrive/MSC SUSDEV/NAI/NAI Individual Assignement/Biotech.pdf")     
+layout_graphopt <- layout_with_graphopt(Biotech)
+plot(Biotech, layout = layout_graphopt, vertex.label=NA, main = "Biotech")
+dev.off()
+
+pdf("C:/Users/Gildas/OneDrive/MSC SUSDEV/NAI/NAI Individual Assignement/Nanotech.pdf") 
+layout_graphopt <- layout_with_graphopt(Microelectronics)
+plot(Microelectronics, layout = layout_graphopt, vertex.label=NA, main = "Microelectronics")  
+dev.off()
+
+pdf("C:/Users/Gildas/OneDrive/MSC SUSDEV/NAI/NAI Individual Assignement/Nanotech.pdf") 
+layout_graphopt <- layout_with_graphopt(Nanotech)
+plot(Nanotech, layout = layout_graphopt, vertex.label=NA, main = "Nanotech")  
+dev.off()
+
+pdf("C:/Users/Gildas/OneDrive/MSC SUSDEV/NAI/NAI Individual Assignement/Photonics.pdf") 
+layout_graphopt <- layout_with_graphopt(Photonics)
+plot(Photonics, layout = layout_graphopt, vertex.label=NA, main = "Photonics")  
+dev.off()
+
+
+
+#plot(Advanced_Materials, layout = l_kk, vertex.label=NA, main = "Advanced Materials")       
+#l_kk <- layout_with_kk(Biotech)                                      
+#plot(Biotech, layout = l_kk, vertex.label=NA, main = "Biotech")       
+#l_kk <- layout_with_kk(Microelectronics) 
+#plot(Microelectronics, layout = l_kk, vertex.label=NA, main = "Microelectronics")       
+#l_kk <- layout_with_kk(Nanotech) 
+#plot(Nanotech, layout = l_kk, vertex.label=NA, main = "Nanotech")       
+#l_kk <- layout_with_kk(Photonics) 
+#plot(Photonics, layout = l_kk, vertex.label=NA, main = "Photonics")       
+
+
+
+
+#. 4.4 Lets get degree distribution histogram
+
+
+g1.deg.histogram <- as.data.frame(table(g1.deg))
+g2.deg.histogram <- as.data.frame(table(g2.deg))
+g3.deg.histogram <- as.data.frame(table(g3.deg))
+g4.deg.histogram <- as.data.frame(table(g4.deg))
+g5.deg.histogram <- as.data.frame(table(g5.deg))
+g1.deg.histogram[,1] <- as.numeric(g1.deg.histogram[,1])
+g2.deg.histogram[,1] <- as.numeric(g2.deg.histogram[,1])
+g3.deg.histogram[,1] <- as.numeric(g3.deg.histogram[,1])
+g4.deg.histogram[,1] <- as.numeric(g4.deg.histogram[,1])
+g5.deg.histogram[,1] <- as.numeric(g5.deg.histogram[,1])
+
+pdf("C:/Users/Gildas/OneDrive/MSC SUSDEV/NAI/NAI Individual Assignement/g1deghistogram.pdf")
+ggplot(g1.deg.histogram, aes(x = g1.deg, y = Freq)) +
+  geom_col() +
+  scale_x_continuous("Degree") +
+  scale_y_continuous("Frequency") +
+  ggtitle("Advanced Materials - Actors' degree distribution")
+dev.off()
+pdf("C:/Users/Gildas/OneDrive/MSC SUSDEV/NAI/NAI Individual Assignement/g2deghistogram.pdf")
+ggplot(g2.deg.histogram, aes(x = g2.deg, y = Freq)) +
+  geom_col() +
+  scale_x_continuous("Degree") +
+  scale_y_continuous("Frequency") +
+  ggtitle("Biotech - Actors' degree distribution")
+dev.off()
+pdf("C:/Users/Gildas/OneDrive/MSC SUSDEV/NAI/NAI Individual Assignement/g3deghistogram.pdf")
+ggplot(g3.deg.histogram, aes(x = g3.deg, y = Freq)) +
+  geom_col() +
+  scale_x_continuous("Degree") +
+  scale_y_continuous("Frequency") +
+  ggtitle("Microelectronics - Actors' degree distribution")
+dev.off()
+pdf("C:/Users/Gildas/OneDrive/MSC SUSDEV/NAI/NAI Individual Assignement/g4deghistogram.pdf")
+ggplot(g4.deg.histogram, aes(x = g4.deg, y = Freq)) +
+  geom_col() +
+  scale_x_continuous("Degree") +
+  scale_y_continuous("Frequency") +
+  ggtitle("Nanotech - Actors' degree distribution")
+dev.off()
+pdf("C:/Users/Gildas/OneDrive/MSC SUSDEV/NAI/NAI Individual Assignement/g5deghistogram.pdf")
+ggplot(g5.deg.histogram, aes(x = g5.deg, y = Freq)) +
+  geom_col() +
+  scale_x_continuous("Degree") +
+  scale_y_continuous("Frequency") +
+  ggtitle("Photonics - Actors' degree distribution")
+dev.off()
+
+
+#. 4.5 Lets get Eigenvalue centrlaiyt distribution histogram
+
+g1.eigen.histogram <- as.data.frame(table(df1.eigen))
+g2.eigen.histogram <- as.data.frame(table(df2.eigen))
+g3.eigen.histogram <- as.data.frame(table(df3.eigen))
+g4.eigen.histogram <- as.data.frame(table(df4.eigen))
+g5.eigen.histogram <- as.data.frame(table(df5.eigen))
+
+g1.eigen.histogram[,1] <- as.numeric(g1.eigen.histogram[,1])
+g2.eigen.histogram[,1] <- as.numeric(g2.eigen.histogram[,1])
+g3.eigen.histogram[,1] <- as.numeric(g3.eigen.histogram[,1])
+g4.eigen.histogram[,1] <- as.numeric(g4.eigen.histogram[,1])
+g5.eigen.histogram[,1] <- as.numeric(g5.eigen.histogram[,1])
+
+write.csv(df1.eigen,"ggplot_g1eigen.csv")
+write.csv(df2.eigen,"ggplot_g2eigen.csv")
+write.csv(df3.eigen,"ggplot_g3eigen.csv")
+write.csv(df4.eigen,"ggplot_g4eigen.csv")
+write.csv(df5.eigen,"ggplot_g5eigen.csv")
+
+write.csv(df1.deg,"ggplot_g1deg.csv")
+write.csv(df2.deg,"ggplot_g2deg.csv")
+write.csv(df3.deg,"ggplot_g3deg.csv")
+write.csv(df4.deg,"ggplot_g4deg.csv")
+write.csv(df5.deg,"ggplot_g5deg.csv")
+
+
+              pdf("C:/Users/Gildas/OneDrive/MSC SUSDEV/NAI/NAI Individual Assignement/g1Eigenhistogram.pdf")
+              ggplot(g1.eigen.histogram, aes(x = df1.eigen, y = Freq)) +
+                geom_col() +
+                scale_x_continuous("Eigenvalue score") +
+                scale_y_continuous("Frequency") +
+                ggtitle("Advanced Materials - Actors' Eigenvalue distribution")
+              dev.off()
+              pdf("C:/Users/Gildas/OneDrive/MSC SUSDEV/NAI/NAI Individual Assignement/g2Eigenhistogram.pdf")
+              ggplot(g2.eigen.histogram, aes(x = df2.eigen, y = Freq)) +
+                geom_col() +
+                scale_x_continuous("Eigenvalue score") +
+                scale_y_continuous("Frequency", trans = "log10") +
+                ggtitle("Biotech - Actors' Eigenvalue distribution")
+              dev.off()
+              pdf("C:/Users/Gildas/OneDrive/MSC SUSDEV/NAI/NAI Individual Assignement/g3Eigenhistogram.pdf")
+              ggplot(g3.eigen.histogram, aes(x = df3.eigen, y = Freq)) +
+                geom_col() +
+                scale_x_continuous("Eigenvalue score") +
+                scale_y_continuous("Frequency", trans = "log10") +
+                ggtitle("Microelectronics - Actors' Eigenvalue distribution")
+              dev.off()
+              pdf("C:/Users/Gildas/OneDrive/MSC SUSDEV/NAI/NAI Individual Assignement/g4Eigenhistogram.pdf")
+              ggplot(g4.eigen.histogram, aes(x = df4.eigen, y = Freq)) +
+                geom_col() +
+                scale_x_continuous("Eigenvalue score") +
+                scale_y_continuous("Frequency", trans = "log10") +
+                ggtitle("Nanotech - Actors' Eigenvalue distribution")
+              dev.off()
+              pdf("C:/Users/Gildas/OneDrive/MSC SUSDEV/NAI/NAI Individual Assignement/g5Eigenhistogram.pdf")
+              ggplot(g5.eigen.histogram, aes(x = df5.eigen, y = Freq)) +
+                geom_col() +
+                scale_x_continuous("Eigenvalue score") +
+                scale_y_continuous("Frequency") +
+                ggtitle("Photonics - Actors' Eigenvalue distribution")
+              dev.off()
+
+
+
+#. 4.7 Observed brokerage properties
+
+library(sna)
+library(influenceR)
+#Get the adjacency matrix    
+Advanced_Materials_adj <- get.adjacency(Advanced_Materials, sparse = F)
+Biotech_adj <- get.adjacency(Biotech, sparse = F)
+Microelectronics_adj <- get.adjacency(Microelectronics, sparse = F)
+Nanotech_adj <- get.adjacency(Nanotech, sparse = F)
+Photonics_adj <- get.adjacency(Photonics, sparse = F)
+
+#help("brokerage")                                                  #Explore this function
+
+br1 <- sna::brokerage(Advanced_Materials_adj, V(Advanced_Materials)$OrgType2)                       #Calculate brokerage measures, 
+br2 <- sna::brokerage(Biotech_adj, V(Biotech)$OrgType2)                                  
+br3 <- sna::brokerage(Microelectronics_adj, V(Microelectronics)$OrgType2)                  
+br4 <- sna::brokerage(Nanotech_adj, V(Nanotech)$OrgType2)                                 
+br5 <- sna::brokerage(Photonics_adj, V(Photonics)$OrgType2)                               
+
+br1$raw.nli	
+br2$raw.nli	
+br3$raw.nli
+br4$raw.nli
+br5$raw.nli
+
+setwd("C:/Users/Gildas/OneDrive/MSC SUSDEV/NAI/NAI Individual Assignement")
+write.csv(br1$raw.nli	,"br1$raw.nli.csv")
+write.csv(br2$raw.nli	,"br2$raw.nli.csv")
+write.csv(br3$raw.nli	,"br3$raw.nli.csv")
+write.csv(br4$raw.nli	,"br4$raw.nli.csv")
+write.csv(br5$raw.nli	,"br5$raw.nli.csv")
