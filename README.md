@@ -1,6 +1,7 @@
 # NAI-ESSAY
 Exploring NAI Essay dataset
 
-Further exploration possible:
-- add table of #of partners by project 
-- Top 30 participants in terms of centrality (Eigenvector centrality rankings)
+3 files: 
+- Descriptive analysis of the data
+- Network analysis
+- An attempt to complement the data from additional XML files (failed)
